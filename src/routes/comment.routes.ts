@@ -5,14 +5,14 @@ import {
   getCommentById,
   updateComment,
   deleteComment,
-} from '@controllers/comment.controller';
-import { validate } from '@middleware/validate';
+} from '../controllers/comment.controller';
+import { validate } from '../middleware/validate';
 import {
   createCommentSchema,
   updateCommentSchema,
   getCommentByIdSchema,
   deleteCommentSchema,
-} from '@schemas/comment.schema';
+} from '../schemas/comment.schema';
 
 const router = Router();
 

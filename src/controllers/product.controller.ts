@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import Product from '@models/Product';
-import User from '@models/User';
-import { AppError } from '@errors/AppError';
-import { asyncHandler } from '@middleware/errorHandler';
+import Product from '../models/Product';
+import User from '../models/User';
+import { AppError } from '../errors/AppError';
+import { asyncHandler } from '../middleware/errorHandler';
 
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
   const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body;

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodSchema } from 'zod';
 import { z } from 'zod';
-import { AppError } from '@errors/AppError';
+import { AppError } from '../errors/AppError';
 
 type ValidateData = 'body' | 'params' | 'query';
 

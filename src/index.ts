@@ -1,8 +1,7 @@
 import dotenv from 'dotenv';
-import app from './app';
-import { connectDB } from '@config/database';
-
 dotenv.config();
+import app from './app';
+import { connectDB } from './config/database';
 
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || 'development';

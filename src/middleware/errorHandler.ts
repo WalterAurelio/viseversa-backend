@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { AppError } from '@errors/AppError';
+import { AppError } from '../errors/AppError';
 
 interface ErrorResponse {
   status: string;
@@ -11,7 +11,7 @@ interface ErrorResponse {
 }
 
 export const errorHandler = (error: Error | AppError, req: Request, res: Response, next: NextFunction) => {
-  console.error('Error:', error);
+  console.error('❌ Error:', error);
 
   let statusCode = 500;
   let message = 'Ocurrió un error interno del servidor';

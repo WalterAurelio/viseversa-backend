@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import Comment from '@models/Comment';
-import User from '@models/User';
-import { AppError } from '@errors/AppError';
-import { asyncHandler } from '@middleware/errorHandler';
+import Comment from '../models/Comment';
+import User from '../models/User';
+import { AppError } from '../errors/AppError';
+import { asyncHandler } from '../middleware/errorHandler';
 
 // Crear comentario
 export const createComment = asyncHandler(async (req: Request, res: Response) => {

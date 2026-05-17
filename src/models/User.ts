@@ -66,8 +66,8 @@ const userSchema = new Schema<IUser>(
 );
 
 // Índices para optimizar búsquedas
-userSchema.index({ email: 1 });
-userSchema.index({ nombreUsuario: 1 });
+// userSchema.index({ email: 1 });
+// userSchema.index({ nombreUsuario: 1 });
 
 const User = mongoose.model<IUser>('User', userSchema);
 
