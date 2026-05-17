@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { createProduct, getProducts, getProductById, updateProduct, deleteProduct } from '@controllers/product.controller';
-import { validate } from '@middleware/validate';
-import { createProductSchema, updateProductSchema, getProductByIdSchema, deleteProductSchema } from '@schemas/product.schema';
+import { createProduct, getProducts, getProductById, updateProduct, deleteProduct } from '../controllers/product.controller';
+import { validate } from '../middleware/validate';
+import { createProductSchema, updateProductSchema, getProductByIdSchema, deleteProductSchema } from '../schemas/product.schema';
 
 const router = Router();
 

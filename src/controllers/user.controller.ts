@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import User from '@models/User';
-import { AppError } from '@errors/AppError';
-import { asyncHandler } from '@middleware/errorHandler';
+import User from '../models/User';
+import { AppError } from '../errors/AppError';
+import { asyncHandler } from '../middleware/errorHandler';
 
 // Crear usuario
 export const createUser = asyncHandler(async (req: Request, res: Response) => {

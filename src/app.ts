@@ -1,13 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import userRoutes from '@routes/user.routes';
-import productRoutes from '@routes/product.routes';
-import commentRoutes from '@routes/comment.routes';
-import { errorHandler } from '@middleware/errorHandler';
-import { AppError } from '@errors/AppError';
-
-dotenv.config();
+import userRoutes from './routes/user.routes';
+import productRoutes from './routes/product.routes';
+import commentRoutes from './routes/comment.routes';
+import { errorHandler } from './middleware/errorHandler';
+import { AppError } from './errors/AppError';
 
 const app = express();
 
