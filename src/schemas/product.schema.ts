@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { PRODUCT } from '../utils/productValidation';
 
 // Esquema para crear producto
 export const createProductSchema = z.object({
@@ -10,12 +11,12 @@ export const createProductSchema = z.object({
       }),
     titulo: z
       .string()
-      .min(3, 'El título debe tener al menos 3 caracteres')
-      .max(100, 'El título no puede exceder 100 caracteres'),
+      .min(PRODUCT.TITLE.MIN_LENGTH, PRODUCT.TITLE.MIN_LENGTH_MESSAGE)
+      .max(PRODUCT.TITLE.MAX_LENGTH, PRODUCT.TITLE.MAX_LENGTH_MESSAGE),
     descripcion: z
       .string()
-      .min(10, 'La descripción debe tener al menos 10 caracteres')
-      .max(1000, 'La descripción no puede exceder 1000 caracteres'),
+      .min(PRODUCT.DESCRIPTION.MIN_LENGTH, PRODUCT.DESCRIPTION.MIN_LENGTH_MESSAGE)
+      .max(PRODUCT.DESCRIPTION.MAX_LENGTH, PRODUCT.DESCRIPTION.MAX_LENGTH_MESSAGE),
     imagenes: z.array(z.string()).optional(),
     estaActivo: z.boolean().optional(),
   }),
@@ -26,13 +27,13 @@ export const updateProductSchema = z.object({
   body: z.object({
     titulo: z
       .string()
-      .min(3, 'El título debe tener al menos 3 caracteres')
-      .max(100, 'El título no puede exceder 100 caracteres')
+      .min(PRODUCT.TITLE.MIN_LENGTH, PRODUCT.TITLE.MIN_LENGTH_MESSAGE)
+      .max(PRODUCT.TITLE.MAX_LENGTH, PRODUCT.TITLE.MAX_LENGTH_MESSAGE)
       .optional(),
     descripcion: z
       .string()
-      .min(10, 'La descripción debe tener al menos 10 caracteres')
-      .max(1000, 'La descripción no puede exceder 1000 caracteres')
+      .min(PRODUCT.DESCRIPTION.MIN_LENGTH, PRODUCT.DESCRIPTION.MIN_LENGTH_MESSAGE)
+      .max(PRODUCT.DESCRIPTION.MAX_LENGTH, PRODUCT.DESCRIPTION.MAX_LENGTH_MESSAGE)
       .optional(),
     imagenes: z.array(z.string()).optional(),
     estaActivo: z.boolean().optional(),

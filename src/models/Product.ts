@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import { PRODUCT } from '../utils/productValidation';
 
 export interface IProduct extends Document {
   _id: mongoose.Types.ObjectId;
@@ -22,15 +23,15 @@ const productSchema = new Schema<IProduct>(
       type: String,
       required: [true, 'El título del producto es requerido'],
       trim: true,
-      minlength: [3, 'El título debe tener al menos 3 caracteres'],
-      maxlength: [100, 'El título no puede exceder 100 caracteres'],
+      minlength: [PRODUCT.TITLE.MIN_LENGTH, PRODUCT.TITLE.MIN_LENGTH_MESSAGE],
+      maxlength: [PRODUCT.TITLE.MAX_LENGTH, PRODUCT.TITLE.MAX_LENGTH_MESSAGE],
     },
     descripcion: {
       type: String,
       required: [true, 'La descripción es requerida'],
       trim: true,
-      minlength: [10, 'La descripción debe tener al menos 10 caracteres'],
-      maxlength: [1000, 'La descripción no puede exceder 1000 caracteres'],
+      minlength: [PRODUCT.DESCRIPTION.MIN_LENGTH, PRODUCT.DESCRIPTION.MIN_LENGTH_MESSAGE],
+      maxlength: [PRODUCT.DESCRIPTION.MAX_LENGTH, PRODUCT.DESCRIPTION.MAX_LENGTH_MESSAGE],
     },
     imagenes: {
       type: [String],
