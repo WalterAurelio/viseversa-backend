@@ -3,9 +3,10 @@ import Product from '../models/Product';
 import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
+import { CreateProductDto, UpdateProductDto, toProductDto } from '../dtos/product.dto';
 
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body;
+  const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body as CreateProductDto;
 
   const user = await User.findById(usuarioId);
   if (!user) {
@@ -24,7 +25,7 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 201,
     message: 'Producto creado exitosamente',
-    data: product
+    data: toProductDto(product)
   });
 });
 
@@ -35,7 +36,7 @@ export const getProducts = asyncHandler(async (req: Request, res: Response) => {
     status: 'success',
     statusCode: 200,
     message: 'Productos obtenidos exitosamente',
-    data: products
+    data: products.map(toProductDto)
   });
 });
 
@@ -52,13 +53,13 @@ export const getProductById = asyncHandler(async (req: Request, res: Response) =
     status: 'success',
     statusCode: 200,
     message: 'Producto obtenido exitosamente',
-    data: product
+    data: toProductDto(product)
   });
 });
 
 export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
-  // const { titulo, descripcion, imagenes, estaActivo } = req.body;
+  const updatedData = req.body as UpdateProductDto;
 
   // Verificar que el producto existe
   const product = await Product.findById(id);
@@ -67,15 +68,15 @@ export const updateProduct = asyncHandler(async (req: Request, res: Response) =>
   }
 
   // Actualizar campos
-  const updatedData = Object.fromEntries(Object.entries(req.body).filter(([key, value]) => value !== undefined));
-  Object.assign(product, updatedData);
+  const filteredUpdatedData = Object.fromEntries(Object.entries(updatedData).filter(([key, value]) => value !== undefined));
+  Object.assign(product, filteredUpdatedData);
   const updatedProduct = await product.save();
 
   res.status(200).json({
     status: 'success',
     statusCode: 200,
     message: 'Producto actualizado exitosamente',
-    data: updatedProduct
+    data: toProductDto(updatedProduct)
   });
 });
 
@@ -92,6 +93,6 @@ export const deleteProduct = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 200,
     message: 'Producto eliminado exitosamente',
-    data: product
+    data: toProductDto(product)
   });
 });
