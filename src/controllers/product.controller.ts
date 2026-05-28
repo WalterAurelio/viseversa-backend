@@ -3,10 +3,11 @@ import Product from '../models/Product';
 import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
-import { CreateProductDto, UpdateProductDto, toProductDto } from '../dtos/product.dto';
+import { ProductDto } from '../dtos/product.dto';
+import { CreateProductInput, UpdateProductInput } from '@/schemas/product.schema';
 
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body as CreateProductDto;
+  const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body as CreateProductInput['body'];
 
   const user = await User.findById(usuarioId);
   if (!user) {
@@ -25,7 +26,7 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 201,
     message: 'Producto creado exitosamente',
-    data: toProductDto(product)
+    data: new ProductDto(product)
   });
 });
 
@@ -36,7 +37,7 @@ export const getProducts = asyncHandler(async (req: Request, res: Response) => {
     status: 'success',
     statusCode: 200,
     message: 'Productos obtenidos exitosamente',
-    data: products.map(toProductDto)
+    data: products.map(product => new ProductDto(product))
   });
 });
 
@@ -53,13 +54,13 @@ export const getProductById = asyncHandler(async (req: Request, res: Response) =
     status: 'success',
     statusCode: 200,
     message: 'Producto obtenido exitosamente',
-    data: toProductDto(product)
+    data: new ProductDto(product)
   });
 });
 
 export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const updatedData = req.body as UpdateProductDto;
+  const updatedData = req.body as UpdateProductInput['body'];
 
   // Verificar que el producto existe
   const product = await Product.findById(id);
@@ -76,7 +77,7 @@ export const updateProduct = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 200,
     message: 'Producto actualizado exitosamente',
-    data: toProductDto(updatedProduct)
+    data: new ProductDto(updatedProduct)
   });
 });
 
@@ -93,6 +94,6 @@ export const deleteProduct = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 200,
     message: 'Producto eliminado exitosamente',
-    data: toProductDto(product)
+    data: new ProductDto(product)
   });
 });

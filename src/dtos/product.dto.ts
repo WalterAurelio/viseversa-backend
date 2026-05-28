@@ -1,21 +1,7 @@
-import type { IProduct } from '../models/Product';
+import type { IProductDocument } from '../models/Product';
+import IProduct from '@/interfaces/IProduct';
 
-export interface CreateProductDto {
-  usuarioId: string;
-  titulo: string;
-  descripcion: string;
-  imagenes?: string[];
-  estaActivo?: boolean;
-}
-
-export interface UpdateProductDto {
-  titulo?: string;
-  descripcion?: string;
-  imagenes?: string[];
-  estaActivo?: boolean;
-}
-
-export interface ProductDto {
+export class ProductDto implements IProduct {
   id: string;
   usuarioId: string;
   titulo: string;
@@ -23,14 +9,14 @@ export interface ProductDto {
   imagenes: string[];
   estaActivo: boolean;
   comentarios: string[];
-}
 
-export const toProductDto = (product: IProduct): ProductDto => ({
-  id: product._id.toString(),
-  usuarioId: product.usuarioId.toString(),
-  titulo: product.titulo,
-  descripcion: product.descripcion,
-  imagenes: product.imagenes ?? [],
-  estaActivo: product.estaActivo,
-  comentarios: product.comentarios?.map(id => id.toString()) ?? []
-});
+  constructor(data: IProductDocument) {
+    this.id = data._id.toString();
+    this.usuarioId = data.usuarioId.toString();
+    this.titulo = data.titulo;
+    this.descripcion = data.descripcion;
+    this.imagenes = data.imagenes ?? [];
+    this.estaActivo = data.estaActivo;
+    this.comentarios = data.comentarios?.map(id => id.toString()) ?? [];
+  }
+}
