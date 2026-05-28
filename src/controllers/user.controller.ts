@@ -3,10 +3,10 @@ import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
 
-// Crear usuario
 export const createUser = asyncHandler(async (req: Request, res: Response) => {
   const { nombreUsuario, nombres, apellidos, email, contraseña, fotoPerfil, ubicacion } = req.body;
 
+  // Verificar si el email o nombre de usuario ya existe
   const userExists = await User.findOne({
     $or: [{ email }, { nombreUsuario }],
   });
@@ -35,7 +35,6 @@ export const createUser = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-// Obtener todos los usuarios
 export const getUsers = asyncHandler(async (req: Request, res: Response) => {
   const users = await User.find().select('-contraseña');
 
@@ -47,7 +46,6 @@ export const getUsers = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-// Obtener usuario por ID
 export const getUserById = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -65,7 +63,6 @@ export const getUserById = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-// Actualizar usuario
 export const updateUser = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
   const { nombreUsuario, nombres, apellidos, email, contraseña, fotoPerfil, ubicacion, puntacion } = req.body;
@@ -92,29 +89,18 @@ export const updateUser = asyncHandler(async (req: Request, res: Response) => {
   }
 
   // Actualizar campos
-  if (nombreUsuario) user.nombreUsuario = nombreUsuario;
-  if (nombres) user.nombres = nombres;
-  if (apellidos) user.apellidos = apellidos;
-  if (email) user.email = email;
-  if (contraseña) user.contraseña = contraseña;
-  if (fotoPerfil !== undefined) user.fotoPerfil = fotoPerfil;
-  if (ubicacion !== undefined) user.ubicacion = ubicacion;
-  if (puntacion !== undefined) user.puntacion = puntacion;
-
+  const updatedData = Object.fromEntries(Object.entries(req.body).filter(([key, value]) => value !== undefined));
+  Object.assign(user, updatedData);
   const updatedUser = await user.save();
-
-  const userResponse = updatedUser.toObject();
-  delete (userResponse as Partial<typeof userResponse>).contraseña;
 
   res.status(200).json({
     status: 'success',
     statusCode: 200,
     message: 'Usuario actualizado exitosamente',
-    data: userResponse,
+    data: updatedUser,
   });
 });
 
-// Eliminar usuario
 export const deleteUser = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
 

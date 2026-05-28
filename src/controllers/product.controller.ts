@@ -7,7 +7,6 @@ import { asyncHandler } from '../middleware/errorHandler';
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
   const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body;
 
-  // Verificar que el usuario existe
   const user = await User.findById(usuarioId);
   if (!user) {
     throw AppError.notFound('Usuario no encontrado');
@@ -21,9 +20,6 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
     estaActivo: estaActivo ?? true
   });
 
-  // Populate del usuario
-  await product.populate('usuarioId', '-contraseña');
-
   res.status(201).json({
     status: 'success',
     statusCode: 201,
@@ -33,7 +29,7 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
 });
 
 export const getProducts = asyncHandler(async (req: Request, res: Response) => {
-  const products = await Product.find().populate('usuarioId', '-contraseña');
+  const products = await Product.find();
 
   res.status(200).json({
     status: 'success',
@@ -46,7 +42,7 @@ export const getProducts = asyncHandler(async (req: Request, res: Response) => {
 export const getProductById = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const product = await Product.findById(id).populate('usuarioId', '-contraseña');
+  const product = await Product.findById(id);
 
   if (!product) {
     throw AppError.notFound('Producto no encontrado');
@@ -62,7 +58,7 @@ export const getProductById = asyncHandler(async (req: Request, res: Response) =
 
 export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { titulo, descripcion, imagenes, estaActivo } = req.body;
+  // const { titulo, descripcion, imagenes, estaActivo } = req.body;
 
   // Verificar que el producto existe
   const product = await Product.findById(id);
@@ -71,13 +67,9 @@ export const updateProduct = asyncHandler(async (req: Request, res: Response) =>
   }
 
   // Actualizar campos
-  if (titulo) product.titulo = titulo;
-  if (descripcion) product.descripcion = descripcion;
-  if (imagenes !== undefined) product.imagenes = imagenes;
-  if (estaActivo !== undefined) product.estaActivo = estaActivo;
-
+  const updatedData = Object.fromEntries(Object.entries(req.body).filter(([key, value]) => value !== undefined));
+  Object.assign(product, updatedData);
   const updatedProduct = await product.save();
-  await updatedProduct.populate('usuarioId', '-contraseña');
 
   res.status(200).json({
     status: 'success',

@@ -8,6 +8,7 @@ export interface IProduct extends Document {
   descripcion: string;
   imagenes?: string[];
   estaActivo: boolean;
+  comentarios?: mongoose.Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -41,6 +42,11 @@ const productSchema = new Schema<IProduct>(
       type: Boolean,
       default: true,
     },
+    comentarios: {
+      type: [Schema.Types.ObjectId],
+      ref: 'Comment',
+      default: [],
+    }
   },
   {
     timestamps: true,
@@ -50,6 +56,7 @@ const productSchema = new Schema<IProduct>(
 // Índices para optimizar búsquedas
 productSchema.index({ usuarioId: 1 });
 productSchema.index({ estaActivo: 1 });
+productSchema.index({ comentarios: 1 });
 
 const Product = mongoose.model<IProduct>('Product', productSchema);
 
