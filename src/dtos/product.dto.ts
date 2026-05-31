@@ -1,5 +1,5 @@
 import type { IProductDocument } from '../models/Product';
-import IProduct from '@/interfaces/IProduct';
+import IProduct from '../interfaces/IProduct';
 
 export class ProductDto implements IProduct {
   id: string;

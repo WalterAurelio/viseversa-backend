@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PRODUCT } from '../utils/productValidation';
+import { PRODUCT } from '../utils/validation';
 
 // Esquema para crear producto
 export const createProductSchema = z.object({

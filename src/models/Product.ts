@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Types } from 'mongoose';
-import { PRODUCT } from '../utils/productValidation';
-import IProduct from '@/interfaces/IProduct';
+import { PRODUCT } from '../utils/validation';
+import IProduct from '../interfaces/IProduct';
 
 export interface IProductDocument extends Omit<IProduct, 'id' | 'usuarioId' | 'comentarios'>, Document {
   _id: Types.ObjectId;
