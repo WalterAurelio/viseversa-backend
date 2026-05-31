@@ -3,11 +3,12 @@ import Product from '../models/Product';
 import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
+import { ProductDto } from '../dtos/product.dto';
+import { CreateProductInput, UpdateProductInput } from '@/schemas/product.schema';
 
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body;
+  const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body as CreateProductInput['body'];
 
-  // Verificar que el usuario existe
   const user = await User.findById(usuarioId);
   if (!user) {
     throw AppError.notFound('Usuario no encontrado');
@@ -21,32 +22,29 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
     estaActivo: estaActivo ?? true
   });
 
-  // Populate del usuario
-  await product.populate('usuarioId', '-contraseña');
-
   res.status(201).json({
     status: 'success',
     statusCode: 201,
     message: 'Producto creado exitosamente',
-    data: product
+    data: new ProductDto(product)
   });
 });
 
 export const getProducts = asyncHandler(async (req: Request, res: Response) => {
-  const products = await Product.find().populate('usuarioId', '-contraseña');
+  const products = await Product.find();
 
   res.status(200).json({
     status: 'success',
     statusCode: 200,
     message: 'Productos obtenidos exitosamente',
-    data: products
+    data: products.map(product => new ProductDto(product))
   });
 });
 
 export const getProductById = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const product = await Product.findById(id).populate('usuarioId', '-contraseña');
+  const product = await Product.findById(id);
 
   if (!product) {
     throw AppError.notFound('Producto no encontrado');
@@ -56,13 +54,13 @@ export const getProductById = asyncHandler(async (req: Request, res: Response) =
     status: 'success',
     statusCode: 200,
     message: 'Producto obtenido exitosamente',
-    data: product
+    data: new ProductDto(product)
   });
 });
 
 export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { titulo, descripcion, imagenes, estaActivo } = req.body;
+  const updatedData = req.body as UpdateProductInput['body'];
 
   // Verificar que el producto existe
   const product = await Product.findById(id);
@@ -71,19 +69,15 @@ export const updateProduct = asyncHandler(async (req: Request, res: Response) =>
   }
 
   // Actualizar campos
-  if (titulo) product.titulo = titulo;
-  if (descripcion) product.descripcion = descripcion;
-  if (imagenes !== undefined) product.imagenes = imagenes;
-  if (estaActivo !== undefined) product.estaActivo = estaActivo;
-
+  const filteredUpdatedData = Object.fromEntries(Object.entries(updatedData).filter(([key, value]) => value !== undefined));
+  Object.assign(product, filteredUpdatedData);
   const updatedProduct = await product.save();
-  await updatedProduct.populate('usuarioId', '-contraseña');
 
   res.status(200).json({
     status: 'success',
     statusCode: 200,
     message: 'Producto actualizado exitosamente',
-    data: updatedProduct
+    data: new ProductDto(updatedProduct)
   });
 });
 
@@ -100,6 +94,6 @@ export const deleteProduct = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 200,
     message: 'Producto eliminado exitosamente',
-    data: product
+    data: new ProductDto(product)
   });
 });

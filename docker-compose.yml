@@ -1,0 +1,14 @@
+services:
+  viseversa-backend:
+    build: .
+    ports:
+      - "3000:3000"
+  viseversa-mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:

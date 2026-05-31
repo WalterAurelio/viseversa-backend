@@ -1,26 +1,27 @@
 import { z } from 'zod';
+import { USER } from '../utils/validation';
 
 // Esquema para crear usuario
 export const createUserSchema = z.object({
   body: z.object({
     nombreUsuario: z
       .string()
-      .min(3, 'El nombre de usuario debe tener al menos 3 caracteres')
-      .max(30, 'El nombre de usuario no puede exceder 30 caracteres'),
+      .min(USER.NOMBRE_USUARIO.MIN_LENGTH, USER.NOMBRE_USUARIO.MIN_LENGTH_MESSAGE)
+      .max(USER.NOMBRE_USUARIO.MAX_LENGTH, USER.NOMBRE_USUARIO.MAX_LENGTH_MESSAGE),
     nombres: z
       .string()
-      .min(1, 'Los nombres son requeridos')
-      .max(100, 'Los nombres no pueden exceder 100 caracteres'),
+      .min(USER.NOMBRES.MIN_LENGTH, USER.NOMBRES.MIN_LENGTH_MESSAGE)
+      .max(USER.NOMBRES.MAX_LENGTH, USER.NOMBRES.MAX_LENGTH_MESSAGE),
     apellidos: z
       .string()
-      .min(1, 'Los apellidos son requeridos')
-      .max(100, 'Los apellidos no pueden exceder 100 caracteres'),
+      .min(USER.APELLIDOS.MIN_LENGTH, USER.APELLIDOS.MIN_LENGTH_MESSAGE)
+      .max(USER.APELLIDOS.MAX_LENGTH, USER.APELLIDOS.MAX_LENGTH_MESSAGE),
     email: z
       .string()
-      .email('Por favor proporciona un email válido'),
+      .email(USER.EMAIL.INVALID_MESSAGE),
     contraseña: z
       .string()
-      .min(6, 'La contraseña debe tener al menos 6 caracteres'),
+      .min(USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE),
     fotoPerfil: z.string().optional(),
     ubicacion: z.string().optional(),
   }),
@@ -31,32 +32,32 @@ export const updateUserSchema = z.object({
   body: z.object({
     nombreUsuario: z
       .string()
-      .min(3, 'El nombre de usuario debe tener al menos 3 caracteres')
-      .max(30, 'El nombre de usuario no puede exceder 30 caracteres')
+      .min(USER.NOMBRE_USUARIO.MIN_LENGTH, USER.NOMBRE_USUARIO.MIN_LENGTH_MESSAGE)
+      .max(USER.NOMBRE_USUARIO.MAX_LENGTH, USER.NOMBRE_USUARIO.MAX_LENGTH_MESSAGE)
       .optional(),
     nombres: z
       .string()
-      .min(1, 'Los nombres son requeridos')
-      .max(100, 'Los nombres no pueden exceder 100 caracteres')
+      .min(USER.NOMBRES.MIN_LENGTH, USER.NOMBRES.MIN_LENGTH_MESSAGE)
+      .max(USER.NOMBRES.MAX_LENGTH, USER.NOMBRES.MAX_LENGTH_MESSAGE)
       .optional(),
     apellidos: z
       .string()
-      .min(1, 'Los apellidos son requeridos')
-      .max(100, 'Los apellidos no pueden exceder 100 caracteres')
+      .min(USER.APELLIDOS.MIN_LENGTH, USER.APELLIDOS.MIN_LENGTH_MESSAGE)
+      .max(USER.APELLIDOS.MAX_LENGTH, USER.APELLIDOS.MAX_LENGTH_MESSAGE)
       .optional(),
     email: z
       .string()
-      .email('Por favor proporciona un email válido')
+      .email(USER.EMAIL.INVALID_MESSAGE)
       .optional(),
     contraseña: z
       .string()
-      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+      .min(USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE)
       .optional(),
     fotoPerfil: z.string().optional(),
     ubicacion: z.string().optional(),
     puntacion: z
       .number()
-      .min(0, 'La puntuación no puede ser negativa')
+      .min(USER.PUNTACION.MIN_VALUE, USER.PUNTACION.MIN_VALUE_MESSAGE)
       .optional(),
   }),
 });

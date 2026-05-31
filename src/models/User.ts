@@ -1,67 +1,59 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import IUser from '../interfaces/IUser';
+import { USER } from '../utils/validation';
 
-export interface IUser extends Document {
+export interface IUserDocument extends Omit<IUser, 'id'>, Document {
   _id: mongoose.Types.ObjectId;
-  nombreUsuario: string;
-  fotoPerfil?: string;
-  nombres: string;
-  apellidos: string;
-  email: string;
-  contraseña: string;
-  puntacion: number;
-  ubicacion?: string;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUserDocument>(
   {
     nombreUsuario: {
       type: String,
       required: [true, 'El nombre de usuario es requerido'],
       unique: true,
       trim: true,
-      minlength: [3, 'El nombre de usuario debe tener al menos 3 caracteres'],
-      maxlength: [30, 'El nombre de usuario no puede exceder 30 caracteres'],
+      minlength: [USER.NOMBRE_USUARIO.MIN_LENGTH, USER.NOMBRE_USUARIO.MIN_LENGTH_MESSAGE],
+      maxlength: [USER.NOMBRE_USUARIO.MAX_LENGTH, USER.NOMBRE_USUARIO.MAX_LENGTH_MESSAGE]
     },
     fotoPerfil: {
       type: String,
-      default: null,
+      default: null
     },
     nombres: {
       type: String,
       required: [true, 'Los nombres son requeridos'],
-      trim: true,
+      trim: true
     },
     apellidos: {
       type: String,
       required: [true, 'Los apellidos son requeridos'],
-      trim: true,
+      trim: true
     },
     email: {
       type: String,
       required: [true, 'El email es requerido'],
       unique: true,
       lowercase: true,
-      match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Por favor proporciona un email válido'],
+      match: [USER.EMAIL.REGEX, USER.EMAIL.INVALID_MESSAGE]
     },
     contraseña: {
       type: String,
       required: [true, 'La contraseña es requerida'],
-      minlength: [6, 'La contraseña debe tener al menos 6 caracteres'],
+      minlength: [USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE]
     },
     puntacion: {
       type: Number,
       default: 0,
-      min: [0, 'La puntuación no puede ser negativa'],
+      min: [USER.PUNTACION.MIN_VALUE, USER.PUNTACION.MIN_VALUE_MESSAGE]
     },
     ubicacion: {
       type: String,
-      default: null,
-    },
+      default: null
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
@@ -69,6 +61,6 @@ const userSchema = new Schema<IUser>(
 // userSchema.index({ email: 1 });
 // userSchema.index({ nombreUsuario: 1 });
 
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model<IUserDocument>('User', userSchema);
 
 export default User;

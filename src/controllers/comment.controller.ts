@@ -4,7 +4,6 @@ import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
 
-// Crear comentario
 export const createComment = asyncHandler(async (req: Request, res: Response) => {
   const { usuarioId, descripcion, imagenes } = req.body;
 
@@ -20,9 +19,6 @@ export const createComment = asyncHandler(async (req: Request, res: Response) =>
     imagenes,
   });
 
-  // Populate del usuario
-  await comment.populate('usuarioId', '-contraseña');
-
   res.status(201).json({
     status: 'success',
     statusCode: 201,
@@ -31,9 +27,8 @@ export const createComment = asyncHandler(async (req: Request, res: Response) =>
   });
 });
 
-// Obtener todos los comentarios
 export const getComments = asyncHandler(async (req: Request, res: Response) => {
-  const comments = await Comment.find().populate('usuarioId', '-contraseña');
+  const comments = await Comment.find();
 
   res.status(200).json({
     status: 'success',
@@ -43,11 +38,10 @@ export const getComments = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-// Obtener comentario por ID
 export const getCommentById = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const comment = await Comment.findById(id).populate('usuarioId', '-contraseña');
+  const comment = await Comment.findById(id);
 
   if (!comment) {
     throw AppError.notFound('Comentario no encontrado');
@@ -61,7 +55,6 @@ export const getCommentById = asyncHandler(async (req: Request, res: Response) =
   });
 });
 
-// Actualizar comentario
 export const updateComment = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
   const { descripcion, imagenes } = req.body;
@@ -77,7 +70,6 @@ export const updateComment = asyncHandler(async (req: Request, res: Response) =>
   if (imagenes !== undefined) comment.imagenes = imagenes;
 
   const updatedComment = await comment.save();
-  await updatedComment.populate('usuarioId', '-contraseña');
 
   res.status(200).json({
     status: 'success',
@@ -87,7 +79,6 @@ export const updateComment = asyncHandler(async (req: Request, res: Response) =>
   });
 });
 
-// Eliminar comentario
 export const deleteComment = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
 

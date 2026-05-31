@@ -7,7 +7,11 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "seed": "ts-node src/seeds/user.seed.ts"
+  },
+  "nodemonConfig": {
+    "legacyWatch": true
   },
   "keywords": [
     "express",
@@ -22,18 +26,19 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "axios": "^1.16.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongoose": "^8.0.3",
-    "zod": "^3.22.4",
-    "dotenv": "^16.3.1",
-    "cors": "^2.8.5"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.5",
-    "@types/cors": "^2.8.17",
-    "typescript": "^5.3.3",
+    "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
-    "nodemon": "^3.0.2"
+    "typescript": "^5.3.3"
   }
 }
