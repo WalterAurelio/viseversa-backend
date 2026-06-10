@@ -3,6 +3,7 @@ import Comment from '../models/Comment';
 import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
+import { CommentDto } from '../dtos/comment.dto';
 
 export const createComment = asyncHandler(async (req: Request, res: Response) => {
   const { usuarioId, descripcion, imagenes } = req.body;
@@ -23,7 +24,7 @@ export const createComment = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 201,
     message: 'Comentario creado exitosamente',
-    data: comment,
+    data: new CommentDto(comment),
   });
 });
 
@@ -34,7 +35,7 @@ export const getComments = asyncHandler(async (req: Request, res: Response) => {
     status: 'success',
     statusCode: 200,
     message: 'Comentarios obtenidos exitosamente',
-    data: comments,
+    data: comments.map(comment => new CommentDto(comment)),
   });
 });
 
@@ -51,7 +52,7 @@ export const getCommentById = asyncHandler(async (req: Request, res: Response) =
     status: 'success',
     statusCode: 200,
     message: 'Comentario obtenido exitosamente',
-    data: comment,
+    data: new CommentDto(comment),
   });
 });
 
@@ -75,7 +76,7 @@ export const updateComment = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 200,
     message: 'Comentario actualizado exitosamente',
-    data: updatedComment,
+    data: new CommentDto(updatedComment),
   });
 });
 
@@ -92,6 +93,6 @@ export const deleteComment = asyncHandler(async (req: Request, res: Response) =>
     status: 'success',
     statusCode: 200,
     message: 'Comentario eliminado exitosamente',
-    data: comment,
+    data: new CommentDto(comment),
   });
 });

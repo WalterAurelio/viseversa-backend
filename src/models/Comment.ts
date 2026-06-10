@@ -1,20 +1,23 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import IComment from '../interfaces/IComment';
 
-export interface IComment extends Document {
+export interface ICommentDocument extends Omit<IComment, 'id' | 'usuarioId' | 'productoId'>, Document {
   _id: mongoose.Types.ObjectId;
   usuarioId: mongoose.Types.ObjectId;
-  descripcion: string;
-  imagenes?: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  productoId: mongoose.Types.ObjectId;
 }
 
-const commentSchema = new Schema<IComment>(
+const commentSchema = new Schema<ICommentDocument>(
   {
     usuarioId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'El ID del usuario es requerido'],
+    },
+    productoId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Product',
+      required: [true, 'El ID del producto es requerido'],
     },
     descripcion: {
       type: String,
@@ -36,6 +39,6 @@ const commentSchema = new Schema<IComment>(
 // Índices para optimizar búsquedas
 commentSchema.index({ usuarioId: 1 });
 
-const Comment = mongoose.model<IComment>('Comment', commentSchema);
+const Comment = mongoose.model<ICommentDocument>('Comment', commentSchema);
 
 export default Comment;
