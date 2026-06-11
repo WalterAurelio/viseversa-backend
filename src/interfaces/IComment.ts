@@ -3,7 +3,7 @@ interface IComment {
   usuarioId: string;
   productoId: string;
   descripcion: string;
-  imagenes?: string[];
+  imagenes: string[];
   createdAt: Date;
   updatedAt: Date;
 }

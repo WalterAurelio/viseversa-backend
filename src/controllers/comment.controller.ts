@@ -1,21 +1,28 @@
 import { Request, Response } from 'express';
 import Comment from '../models/Comment';
 import User from '../models/User';
+import Product from '../models/Product';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
 import { CommentDto } from '../dtos/comment.dto';
 
 export const createComment = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, descripcion, imagenes } = req.body;
+  const { usuarioId, productoId, descripcion, imagenes } = req.body;
 
   // Verificar que el usuario existe
   const user = await User.findById(usuarioId);
   if (!user) {
     throw AppError.notFound('Usuario no encontrado');
   }
+  // Verificar que existe el producto
+  const product = await Product.findById(productoId);
+  if (!product) {
+    throw AppError.notFound('Producto no encontrado');
+  }
 
   const comment = await Comment.create({
     usuarioId,
+    productoId,
     descripcion,
     imagenes,
   });
