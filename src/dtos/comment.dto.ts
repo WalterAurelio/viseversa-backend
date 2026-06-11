@@ -6,7 +6,7 @@ export class CommentDto implements IComment {
   usuarioId: string;
   productoId: string;
   descripcion: string;
-  imagenes?: string[];
+  imagenes: string[];
   createdAt: Date;
   updatedAt: Date;
 
@@ -15,7 +15,7 @@ export class CommentDto implements IComment {
     this.usuarioId = data.usuarioId.toString();
     this.productoId = data.productoId.toString();
     this.descripcion = data.descripcion;
-    this.imagenes = data.imagenes ?? [];
+    this.imagenes = data.imagenes;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
   }

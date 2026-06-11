@@ -8,6 +8,11 @@ export const createCommentSchema = z.object({
       .refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
         message: 'ID de usuario inválido',
       }),
+    productoId: z
+      .string()
+      .refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
+        message: 'ID de producto inválido',
+      }),
     descripcion: z
       .string()
       .min(5, 'La descripción debe tener al menos 5 caracteres')
