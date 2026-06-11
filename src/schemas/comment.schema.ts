@@ -8,7 +8,7 @@ export const createCommentSchema = z.object({
       .refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
         message: 'ID de usuario inválido',
       }),
-      productoId: z
+    productoId: z
       .string()
       .refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
         message: 'ID de producto inválido',
