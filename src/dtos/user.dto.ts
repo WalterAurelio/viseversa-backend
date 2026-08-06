@@ -5,22 +5,24 @@ export class UserDto implements IUser {
   id: string;
   nombreUsuario: string;
   fotoPerfil?: string;
-  nombres: string;
-  apellidos: string;
+  nombre: string;
+  apellido: string;
   email: string;
-  contraseña: string;
-  puntacion: number;
+  // contraseña: string;
+  // puntacion: number;
   ubicacion?: string;
+  firebaseUid: string;
 
   constructor(data: IUserDocument) {
     this.id = data._id.toString();
     this.nombreUsuario = data.nombreUsuario;
     this.fotoPerfil = data.fotoPerfil;
-    this.nombres = data.nombres;
-    this.apellidos = data.apellidos;
+    this.nombre = data.nombre;
+    this.apellido = data.apellido;
     this.email = data.email;
-    this.contraseña = data.contraseña;
-    this.puntacion = data.puntacion;
+    // this.contraseña = data.contraseña;
+    // this.puntacion = data.puntacion;
     this.ubicacion = data.ubicacion;
+    this.firebaseUid = data.firebaseUid;
   }
 }

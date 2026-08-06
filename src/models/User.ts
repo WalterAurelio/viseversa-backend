@@ -20,14 +20,14 @@ const userSchema = new Schema<IUserDocument>(
       type: String,
       default: null
     },
-    nombres: {
+    nombre: {
       type: String,
-      required: [true, 'Los nombres son requeridos'],
+      required: [true, 'El nombre es requerido'],
       trim: true
     },
-    apellidos: {
+    apellido: {
       type: String,
-      required: [true, 'Los apellidos son requeridos'],
+      required: [true, 'El apellido es requerido'],
       trim: true
     },
     email: {
@@ -37,19 +37,24 @@ const userSchema = new Schema<IUserDocument>(
       lowercase: true,
       match: [USER.EMAIL.REGEX, USER.EMAIL.INVALID_MESSAGE]
     },
-    contraseña: {
+    /* contraseña: {
       type: String,
       required: [true, 'La contraseña es requerida'],
       minlength: [USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE]
-    },
-    puntacion: {
+    }, */
+    /* puntacion: {
       type: Number,
       default: 0,
       min: [USER.PUNTACION.MIN_VALUE, USER.PUNTACION.MIN_VALUE_MESSAGE]
-    },
+    }, */
     ubicacion: {
       type: String,
       default: null
+    },
+    firebaseUid: {
+      type: String,
+      required: [true, 'El UID de Firebase es requerido'],
+      unique: true
     }
   },
   {
