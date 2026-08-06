@@ -7,7 +7,7 @@ import { ProductDto } from '../dtos/product.dto';
 import { CreateProductInput, UpdateProductInput } from '@/schemas/product.schema';
 
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, titulo, descripcion, imagenes, estaActivo } = req.body as CreateProductInput['body'];
+  const { usuarioId, titulo, descripcion, imagenes, estaActivo, categoria, genero, talle, color, marca, condicion } = req.body as CreateProductInput['body'];
 
   const user = await User.findById(usuarioId);
   if (!user) {
@@ -19,7 +19,13 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
     titulo,
     descripcion,
     imagenes,
-    estaActivo: estaActivo ?? true
+    estaActivo: estaActivo ?? true,
+    categoria,
+    genero,
+    talle, 
+    color,
+    marca, 
+    condicion
   });
 
   res.status(201).json({
