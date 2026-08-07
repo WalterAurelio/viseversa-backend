@@ -8,3 +8,4 @@ dist/
 .vscode/
 .idea/
 !.env.example
+src/firebase/*.json

@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
+import './firebase/app';
 import app from './app';
 import { connectDB } from './config/database';
 

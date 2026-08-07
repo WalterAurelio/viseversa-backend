@@ -1,12 +1,11 @@
 interface IUser {
   id: string;
-  nombreUsuario: string;
-  fotoPerfil?: string;
-  nombre: string;
-  apellido: string;
   email: string;
   // contraseña: string;
-  // puntacion: number;
+  nombre: string;
+  apellido: string;
+  nombreUsuario: string;
+  fotoPerfil?: string;
   ubicacion?: string;
   firebaseUid: string;
 }

@@ -8,28 +8,6 @@ export interface IUserDocument extends Omit<IUser, 'id'>, Document {
 
 const userSchema = new Schema<IUserDocument>(
   {
-    nombreUsuario: {
-      type: String,
-      required: [true, 'El nombre de usuario es requerido'],
-      unique: true,
-      trim: true,
-      minlength: [USER.NOMBRE_USUARIO.MIN_LENGTH, USER.NOMBRE_USUARIO.MIN_LENGTH_MESSAGE],
-      maxlength: [USER.NOMBRE_USUARIO.MAX_LENGTH, USER.NOMBRE_USUARIO.MAX_LENGTH_MESSAGE]
-    },
-    fotoPerfil: {
-      type: String,
-      default: null
-    },
-    nombre: {
-      type: String,
-      required: [true, 'El nombre es requerido'],
-      trim: true
-    },
-    apellido: {
-      type: String,
-      required: [true, 'El apellido es requerido'],
-      trim: true
-    },
     email: {
       type: String,
       required: [true, 'El email es requerido'],
@@ -42,11 +20,28 @@ const userSchema = new Schema<IUserDocument>(
       required: [true, 'La contraseña es requerida'],
       minlength: [USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE]
     }, */
-    /* puntacion: {
-      type: Number,
-      default: 0,
-      min: [USER.PUNTACION.MIN_VALUE, USER.PUNTACION.MIN_VALUE_MESSAGE]
-    }, */
+    nombre: {
+      type: String,
+      required: [true, 'El nombre es requerido'],
+      trim: true
+    },
+    apellido: {
+      type: String,
+      required: [true, 'El apellido es requerido'],
+      trim: true
+    },
+    nombreUsuario: {
+      type: String,
+      required: [true, 'El nombre de usuario es requerido'],
+      unique: true,
+      trim: true,
+      minlength: [USER.NOMBRE_USUARIO.MIN_LENGTH, USER.NOMBRE_USUARIO.MIN_LENGTH_MESSAGE],
+      maxlength: [USER.NOMBRE_USUARIO.MAX_LENGTH, USER.NOMBRE_USUARIO.MAX_LENGTH_MESSAGE]
+    },
+    fotoPerfil: {
+      type: String,
+      default: null
+    },
     ubicacion: {
       type: String,
       default: null

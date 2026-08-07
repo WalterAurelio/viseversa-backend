@@ -4,16 +4,18 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - viseversa-mongo-dev
+    environment:
+      - FIREBASE_AUTH_EMULATOR_HOST=host.docker.internal:9099
     volumes:
       - .:/home/app
       - /home/app/node_modules
   viseversa-mongo-dev:
     image: mongo
     ports:
-      - "27018:27017"
+      - '27018:27017'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
