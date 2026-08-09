@@ -14,7 +14,7 @@ export const errorHandler = (error: Error | AppError, req: Request, res: Respons
   console.error('❌ Error:', error);
 
   let statusCode = 500;
-  let message = 'Ocurrió un error interno del servidor';
+  let message = 'Ocurrió un error interno del servidor'; // ¿Redundante?
   let isOperational = false;
 
   if (error instanceof AppError) {
@@ -23,6 +23,7 @@ export const errorHandler = (error: Error | AppError, req: Request, res: Respons
     isOperational = error.isOperational;
   }
 
+  // Ésta es la respuesta de error que se enviará al cliente
   const errorResponse: ErrorResponse = {
     status: 'error',
     statusCode,
@@ -31,14 +32,14 @@ export const errorHandler = (error: Error | AppError, req: Request, res: Respons
     path: req.path
   };
 
-  // Enviar más detalles en desarrollo
+  // En desarrollo, incluir el stack trace en la respuesta al cliente
   if (process.env.NODE_ENV === 'development') {
     errorResponse.data = {
       stack: error instanceof Error ? error.stack : undefined
     };
   }
 
-  // Si no es un error operacional, registrar y no enviar detalles
+  // Si no es un error operacional, registrar el error completo en el servidor para su análisis, pero enviar un mensaje genérico al cliente
   if (!isOperational) {
     console.error('Error no operacional:', error);
     errorResponse.message = 'Ocurrió un error interno del servidor';

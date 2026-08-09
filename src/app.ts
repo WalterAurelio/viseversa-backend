@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import authRoutes from './routes/api/auth.routes';
 import userRoutes from './routes/user.routes';
 import productRoutes from './routes/product.routes';
 import commentRoutes from './routes/comment.routes';
@@ -29,10 +30,10 @@ app.get('/api/health', (req: Request, res: Response) => {
 });
 
 // Rutas API
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/comments', commentRoutes);
-
 // Rutas no encontradas (404)
 app.use((req: Request, res: Response, next: NextFunction) => {
   throw AppError.notFound(`Ruta no encontrada: ${req.method} ${req.path}`);

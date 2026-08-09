@@ -8,6 +8,28 @@ export interface IUserDocument extends Omit<IUser, 'id'>, Document {
 
 const userSchema = new Schema<IUserDocument>(
   {
+    email: {
+      type: String,
+      required: [true, 'El email es requerido'],
+      unique: true,
+      lowercase: true,
+      match: [USER.EMAIL.REGEX, USER.EMAIL.INVALID_MESSAGE]
+    },
+    /* contraseña: {
+      type: String,
+      required: [true, 'La contraseña es requerida'],
+      minlength: [USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE]
+    }, */
+    nombre: {
+      type: String,
+      required: [true, 'El nombre es requerido'],
+      trim: true
+    },
+    apellido: {
+      type: String,
+      required: [true, 'El apellido es requerido'],
+      trim: true
+    },
     nombreUsuario: {
       type: String,
       required: [true, 'El nombre de usuario es requerido'],
@@ -20,36 +42,14 @@ const userSchema = new Schema<IUserDocument>(
       type: String,
       default: null
     },
-    nombres: {
-      type: String,
-      required: [true, 'Los nombres son requeridos'],
-      trim: true
-    },
-    apellidos: {
-      type: String,
-      required: [true, 'Los apellidos son requeridos'],
-      trim: true
-    },
-    email: {
-      type: String,
-      required: [true, 'El email es requerido'],
-      unique: true,
-      lowercase: true,
-      match: [USER.EMAIL.REGEX, USER.EMAIL.INVALID_MESSAGE]
-    },
-    contraseña: {
-      type: String,
-      required: [true, 'La contraseña es requerida'],
-      minlength: [USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE]
-    },
-    puntacion: {
-      type: Number,
-      default: 0,
-      min: [USER.PUNTACION.MIN_VALUE, USER.PUNTACION.MIN_VALUE_MESSAGE]
-    },
     ubicacion: {
       type: String,
       default: null
+    },
+    firebaseUid: {
+      type: String,
+      required: [true, 'El UID de Firebase es requerido'],
+      unique: true
     }
   },
   {

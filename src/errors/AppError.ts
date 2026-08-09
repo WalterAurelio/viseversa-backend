@@ -8,11 +8,15 @@ export class AppError extends Error {
     this.isOperational = isOperational;
 
     Object.setPrototypeOf(this, new.target.prototype); // ¿Qué es esto?
-    Error.captureStackTrace(this, this.constructor); // ¿Qué es esto? 
+    Error.captureStackTrace(this, this.constructor); // ¿Qué es esto?
   }
 
   static badRequest(message: string): AppError {
     return new AppError(message, 400, true);
+  }
+
+  static unauthorized(message: string): AppError {
+    return new AppError(message, 401, true);
   }
 
   static notFound(message: string): AppError {

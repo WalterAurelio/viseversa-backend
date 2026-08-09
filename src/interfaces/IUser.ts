@@ -1,13 +1,13 @@
 interface IUser {
   id: string;
+  email: string;
+  // contraseña: string;
+  nombre: string;
+  apellido: string;
   nombreUsuario: string;
   fotoPerfil?: string;
-  nombres: string;
-  apellidos: string;
-  email: string;
-  contraseña: string;
-  puntacion: number;
   ubicacion?: string;
+  firebaseUid: string;
 }
 
 export default IUser;
