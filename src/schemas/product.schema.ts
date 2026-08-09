@@ -58,12 +58,12 @@ export const updateProductSchema = z.object({
       .optional(),
     imagenes: z.array(z.string()).optional(),
     estaActivo: z.boolean().optional(),
-    categoria: z.enum(CATEGORIAS),
-    genero: z.enum(GENEROS),
-    talle: z.enum(TALLES),
-    color: z.enum(COLORES).array(),
-    marca: z.string(),
-    condicion: z.enum(CONDICIONES),
+    categoria: z.enum(CATEGORIAS).optional(),
+    genero: z.enum(GENEROS).optional(),
+    talle: z.enum(TALLES).optional(),
+    color: z.enum(COLORES).array().optional(),
+    marca: z.string().optional(),
+    condicion: z.enum(CONDICIONES).optional(),
   }),
 });
 
