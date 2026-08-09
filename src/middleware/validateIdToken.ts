@@ -1,6 +1,6 @@
 import { AppError } from '../errors/AppError';
 import { Request, Response, NextFunction } from 'express';
-import { getAuth, DecodedIdToken } from 'firebase-admin/auth';
+import { getAuth, DecodedIdToken, FirebaseAuthError } from 'firebase-admin/auth';
 
 // Extendemos la interfaz Request para incluir la propiedad user
 declare module 'express-serve-static-core' {
@@ -19,17 +19,19 @@ export const validateIdToken = async (req: Request, res: Response, next: NextFun
     }
 
     const token = formattedAuthHeader.split(' ')[1];
-    getAuth()
-      .verifyIdToken(token)
-      .then(decodedToken => {
-        console.debug('Firebase ID token verificado');
-        req.user = decodedToken;
-        next();
-      })
-      .catch(error => {
+
+    try {
+      const decodedToken = await getAuth().verifyIdToken(token);
+      console.debug('Firebase ID token verificado');
+      req.user = decodedToken;
+      next();
+    } catch (error) {
+      if (error instanceof FirebaseAuthError) {
         console.error('Error al verificar el token de Firebase', error);
         throw AppError.unauthorized('Token de autorización inválido');
-      });
+      }
+      throw error;
+    }
   } catch (error) {
     next(error);
   }
