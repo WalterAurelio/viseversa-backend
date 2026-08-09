@@ -1,0 +1,95 @@
+[
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a801",
+    "email": "lucia.martinez@example.com",
+    "contraseña": "123456",
+    "nombre": "Lucía",
+    "apellido": "Martínez",
+    "nombreUsuario": "luciamartinez",
+    "fotoPerfil": "https://i.pravatar.cc/150?img=47",
+    "ubicacion": "Buenos Aires, Argentina"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a802",
+    "email": "mateo.rodriguez@example.com",
+    "contraseña": "123456",
+    "nombre": "Mateo",
+    "apellido": "Rodríguez",
+    "nombreUsuario": "mateorodriguez",
+    "ubicacion": "Córdoba, Argentina"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a803",
+    "email": "valentina.gomez@example.com",
+    "contraseña": "123456",
+    "nombre": "Valentina",
+    "apellido": "Gómez",
+    "nombreUsuario": "valentinagomez",
+    "fotoPerfil": "https://i.pravatar.cc/150?img=32"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a804",
+    "email": "tomas.fernandez@example.com",
+    "contraseña": "123456",
+    "nombre": "Tomás",
+    "apellido": "Fernández",
+    "nombreUsuario": "tomasfernandez",
+    "fotoPerfil": "https://i.pravatar.cc/150?img=12",
+    "ubicacion": "Rosario, Argentina"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a805",
+    "email": "camila.lopez@example.com",
+    "contraseña": "123456",
+    "nombre": "Camila",
+    "apellido": "López",
+    "nombreUsuario": "camilalopez",
+    "ubicacion": "Mendoza, Argentina"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a806",
+    "email": "bruno.silva@example.com",
+    "contraseña": "123456",
+    "nombre": "Bruno",
+    "apellido": "Silva",
+    "nombreUsuario": "brunosilva"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a807",
+    "email": "sofia.alvarez@example.com",
+    "contraseña": "123456",
+    "nombre": "Sofía",
+    "apellido": "Álvarez",
+    "nombreUsuario": "sofiaalvarez",
+    "fotoPerfil": "https://i.pravatar.cc/150?img=44",
+    "ubicacion": "La Plata, Argentina"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a808",
+    "email": "joaquin.ramirez@example.com",
+    "contraseña": "123456",
+    "nombre": "Joaquín",
+    "apellido": "Ramírez",
+    "nombreUsuario": "joaquinramirez",
+    "fotoPerfil": "https://i.pravatar.cc/150?img=11"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a809",
+    "email": "elena.castillo@example.com",
+    "contraseña": "123456",
+    "nombre": "Elena",
+    "apellido": "Castillo",
+    "nombreUsuario": "elenacastillo",
+    "ubicacion": "Salta, Argentina"
+  },
+  {
+    "id": "64b7f2e8a1c3d4f5b6e7a80a",
+    "email": "nicolas.ortiz@example.com",
+    "contraseña": "123456",
+    "nombre": "Nicolás",
+    "apellido": "Ortiz",
+    "nombreUsuario": "nicolasortiz",
+    "fotoPerfil": "https://i.pravatar.cc/150?img=13",
+    "ubicacion": "Mar del Plata, Argentina"
+  }
+]
