@@ -7,6 +7,10 @@ import { connectDB } from '../config/database';
 const auth = getAuth();
 
 const seedUsers = async () => {
+  if (!process.env.FIREBASE_AUTH_EMULATOR_HOST) {
+    throw new Error('FIREBASE_AUTH_EMULATOR_HOST no está configurado. Asegúrate de que el emulador de Firebase Authentication esté en funcionamiento.');
+  }
+
   // Eliminar todos los usuarios en la base de datos
   await User.deleteMany({});
   console.log('✅ Usuarios eliminados de la base de datos');
