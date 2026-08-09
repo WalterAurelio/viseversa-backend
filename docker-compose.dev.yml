@@ -9,6 +9,8 @@ services:
       - viseversa-mongo-dev
     environment:
       - FIREBASE_AUTH_EMULATOR_HOST=host.docker.internal:9099
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
     volumes:
       - .:/home/app
       - /home/app/node_modules

@@ -19,12 +19,17 @@ export const validateIdToken = async (req: Request, res: Response, next: NextFun
     }
 
     const token = formattedAuthHeader.split(' ')[1];
-    console.log('Token:', token);
-    const decodedToken = await getAuth().verifyIdToken(token);
-    console.log('Decoded Token:', decodedToken);
-
-    req.user = decodedToken;
-    next();
+    getAuth()
+      .verifyIdToken(token)
+      .then(decodedToken => {
+        console.debug('Firebase ID token verificado');
+        req.user = decodedToken;
+        next();
+      })
+      .catch(error => {
+        console.error('Error al verificar el token de Firebase', error);
+        throw AppError.unauthorized('Token de autorización inválido');
+      });
   } catch (error) {
     next(error);
   }
