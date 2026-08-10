@@ -3,19 +3,26 @@ import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
 import { UpdateUserInput } from '@/schemas/user.schema';
-import { UserDto } from '../dtos/user.dto';
+import { ApiResponse } from '../types/apiResponse';
+import { UserProfileDto } from '../dtos/user.dto';
 
-export const getUsers = asyncHandler(async (req: Request, res: Response) => {
-  const users = await User.find();
+export const getUserProfile = asyncHandler(async (req: Request, res: Response<ApiResponse<UserProfileDto>>) => {
+  const firebaseUid = req.user?.uid;
+
+  const user = await User.findOne({ firebaseUid });
+  if (!user) {
+    throw AppError.notFound('Usuario no encontrado');
+  }
 
   res.status(200).json({
     status: 'success',
     statusCode: 200,
-    message: 'Usuarios obtenidos exitosamente',
-    data: users.map(user => new UserDto(user))
+    message: 'Perfil de usuario obtenido exitosamente',
+    data: new UserProfileDto(user)
   });
 });
 
+// A revisar
 export const getUserById = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -29,7 +36,7 @@ export const getUserById = asyncHandler(async (req: Request, res: Response) => {
     status: 'success',
     statusCode: 200,
     message: 'Usuario obtenido exitosamente',
-    data: new UserDto(user)
+    data: new UserProfileDto(user)
   });
 });
 
@@ -65,7 +72,7 @@ export const updateUser = asyncHandler(async (req: Request, res: Response) => {
     status: 'success',
     statusCode: 200,
     message: 'Usuario actualizado exitosamente',
-    data: new UserDto(updatedUser)
+    data: new UserProfileDto(updatedUser)
   });
 });
 
@@ -82,6 +89,6 @@ export const deleteUser = asyncHandler(async (req: Request, res: Response) => {
     status: 'success',
     statusCode: 200,
     message: 'Usuario eliminado exitosamente',
-    data: new UserDto(user)
+    data: new UserProfileDto(user)
   });
 });
