@@ -3,7 +3,6 @@ import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
 import { CreateUserInput } from '../schemas/user.schema';
-import { UserDto } from '../dtos/user.dto';
 
 export const registerUser = asyncHandler(async (req: Request, res: Response) => {
   const email = req.user?.email;
@@ -30,11 +29,6 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
     firebaseUid
   });
 
-  // Responder con el usuario creado
-  res.status(201).json({
-    status: 'success',
-    statusCode: 201,
-    message: 'Usuario creado exitosamente',
-    data: new UserDto(user)
-  });
+  // Responder con el código de estado 201 (Creado)
+  res.sendStatus(201);
 });

@@ -4,6 +4,7 @@ import { USER } from '../utils/validation';
 
 export interface IUserDocument extends Omit<IUser, 'id'>, Document {
   _id: mongoose.Types.ObjectId;
+  createdAt: Date;
 }
 
 const userSchema = new Schema<IUserDocument>(
@@ -15,11 +16,6 @@ const userSchema = new Schema<IUserDocument>(
       lowercase: true,
       match: [USER.EMAIL.REGEX, USER.EMAIL.INVALID_MESSAGE]
     },
-    /* contraseña: {
-      type: String,
-      required: [true, 'La contraseña es requerida'],
-      minlength: [USER.CONTRASEÑA.MIN_LENGTH, USER.CONTRASEÑA.MIN_LENGTH_MESSAGE]
-    }, */
     nombre: {
       type: String,
       required: [true, 'El nombre es requerido'],
