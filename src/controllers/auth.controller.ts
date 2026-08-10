@@ -30,5 +30,5 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
   });
 
   // Responder con el código de estado 201 (Creado)
-  res.sendStatus(201);
+  res.sendStatus(201).end();
 });

@@ -7,7 +7,6 @@ export class UserProfileDto implements Partial<IUser> {
   nombreUsuario: string;
   fotoPerfil?: string;
   ubicacion?: string;
-  firebaseUid: string;
   createdAt: Date;
 
   constructor(data: IUserDocument) {
@@ -16,7 +15,6 @@ export class UserProfileDto implements Partial<IUser> {
     this.nombreUsuario = data.nombreUsuario;
     this.fotoPerfil = data.fotoPerfil;
     this.ubicacion = data.ubicacion;
-    this.firebaseUid = data.firebaseUid;
     this.createdAt = data.createdAt;
   }
 }

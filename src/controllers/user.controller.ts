@@ -3,7 +3,7 @@ import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
 import { UpdateUserInput } from '@/schemas/user.schema';
-import { ApiResponse } from '@/types/apiResponse';
+import { ApiResponse } from '../types/apiResponse';
 import { UserProfileDto } from '../dtos/user.dto';
 
 export const getUserProfile = asyncHandler(async (req: Request, res: Response<ApiResponse<UserProfileDto>>) => {
