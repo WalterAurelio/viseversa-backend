@@ -1,7 +1,9 @@
 import '../firebase/app';
 import { getAuth } from 'firebase-admin/auth';
 import users from '../json/users.json';
+import products from '../json/products.json';
 import User from '../models/User';
+import Product from '../models/Product';
 import { connectDB } from '../config/database';
 
 const auth = getAuth();
@@ -45,11 +47,17 @@ const seedUsers = async () => {
   }
   console.log('✅ Usuarios creados en Firebase Authentication y en la base de datos');
 };
+const seedProducts = async () => {
+  await Product.deleteMany({ _id: { $in: products.map((prod) => prod._id) } });
+  const createdProducts = await Product.insertMany(products);
+  console.log(`✅ Seed de productos completado: ${createdProducts.length} productos creados.`);
+}
 
 const seedDatabase = async () => {
   try {
     await connectDB();
     await seedUsers();
+    await seedProducts();
     console.log('✅ Base de datos sembrada correctamente');
     process.exit(0); // Salir del proceso después de sembrar la base de datos
   } catch (error) {
