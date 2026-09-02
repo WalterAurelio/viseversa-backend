@@ -1,14 +1,14 @@
 export const CATEGORIAS = [
-  'Remeras',
-  'Camisas',
-  'Buzos',
-  'Abrigos',
-  'Pantalones',
-  'Shorts',
-  'Faldas',
-  'Vestidos',
-  'Calzado',
-  'Accesorios',
+  'remeras',
+  'camisas',
+  'buzos',
+  'abrigos',
+  'pantalones',
+  'shorts',
+  'faldas',
+  'vestidos',
+  'calzado',
+  'accesorios',
 ] as const;
 
 export type Categoria = (typeof CATEGORIAS)[number];

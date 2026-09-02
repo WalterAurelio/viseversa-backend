@@ -76,6 +76,12 @@ export const getProductByIdSchema = z.object({
   }),
 });
 
+export const getProductsByFilterSchema = z.object({
+  params: z.object({
+    categoria: z.enum(CATEGORIAS),
+  })
+});
+
 // Esquema para eliminar producto
 export const deleteProductSchema = z.object({
   params: z.object({

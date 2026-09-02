@@ -1,9 +1,9 @@
 export const CONDICIONES = [
-  'Nuevo',
-  'Excelente estado',
-  'Buen estado',
-  'Estado aceptable',
-  'Necesita reparación',
+  'nuevo',
+  'excelente estado',
+  'buen estado',
+  'estado aceptable',
+  'necesita reparación',
 ] as const;
 
 export type Condicion = (typeof CONDICIONES)[number];

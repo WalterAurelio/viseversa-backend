@@ -48,7 +48,7 @@ const productSchema = new Schema<IProductDocument>(
     categoria: { type: String, required: [true, 'La categoría es requerida'] },
     genero: { type: String, required: [true, 'El género es requerido'] },
     talle: { type: String, required: [true, 'El talle es requerido'] },
-    color: { type: [String], required: [true, 'El color es requerido'] },
+    color: { type: String, required: [true, 'El color es requerido'] },
     marca: { type: String, required: [true, 'La marca es requerida'] },
     condicion: { type: String, required: [true, 'La condicion es requerida'] },
     comentarios: {

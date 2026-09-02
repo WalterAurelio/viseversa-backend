@@ -7,7 +7,7 @@
     "apellido": "Martínez",
     "nombreUsuario": "luciamartinez",
     "fotoPerfil": "https://i.pravatar.cc/150?img=47",
-    "ubicacion": "Buenos Aires, Argentina"
+    "ubicacion": "Buenos Aires"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a802",
@@ -16,7 +16,7 @@
     "nombre": "Mateo",
     "apellido": "Rodríguez",
     "nombreUsuario": "mateorodriguez",
-    "ubicacion": "Córdoba, Argentina"
+    "ubicacion": "Córdoba"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a803",
@@ -25,6 +25,7 @@
     "nombre": "Valentina",
     "apellido": "Gómez",
     "nombreUsuario": "valentinagomez",
+    "ubicacion": "Neuquén",
     "fotoPerfil": "https://i.pravatar.cc/150?img=32"
   },
   {
@@ -35,7 +36,7 @@
     "apellido": "Fernández",
     "nombreUsuario": "tomasfernandez",
     "fotoPerfil": "https://i.pravatar.cc/150?img=12",
-    "ubicacion": "Rosario, Argentina"
+    "ubicacion": "Rosario"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a805",
@@ -44,7 +45,7 @@
     "nombre": "Camila",
     "apellido": "López",
     "nombreUsuario": "camilalopez",
-    "ubicacion": "Mendoza, Argentina"
+    "ubicacion": "Mendoza"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a806",
@@ -52,7 +53,8 @@
     "contraseña": "123456",
     "nombre": "Bruno",
     "apellido": "Silva",
-    "nombreUsuario": "brunosilva"
+    "nombreUsuario": "brunosilva",
+    "ubicacion": "La Rioja"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a807",
@@ -62,7 +64,7 @@
     "apellido": "Álvarez",
     "nombreUsuario": "sofiaalvarez",
     "fotoPerfil": "https://i.pravatar.cc/150?img=44",
-    "ubicacion": "La Plata, Argentina"
+    "ubicacion": "Buenos Aires"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a808",
@@ -71,7 +73,8 @@
     "nombre": "Joaquín",
     "apellido": "Ramírez",
     "nombreUsuario": "joaquinramirez",
-    "fotoPerfil": "https://i.pravatar.cc/150?img=11"
+    "fotoPerfil": "https://i.pravatar.cc/150?img=11",
+    "ubicacion": "La Pampa"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a809",
@@ -80,7 +83,7 @@
     "nombre": "Elena",
     "apellido": "Castillo",
     "nombreUsuario": "elenacastillo",
-    "ubicacion": "Salta, Argentina"
+    "ubicacion": "Salta"
   },
   {
     "id": "64b7f2e8a1c3d4f5b6e7a80a",
@@ -90,6 +93,6 @@
     "apellido": "Ortiz",
     "nombreUsuario": "nicolasortiz",
     "fotoPerfil": "https://i.pravatar.cc/150?img=13",
-    "ubicacion": "Mar del Plata, Argentina"
+    "ubicacion": "Córdoba"
   }
 ]

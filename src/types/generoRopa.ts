@@ -1,7 +1,7 @@
 export const GENEROS = [
-    'Hombre',
-    'Mujer',
-    'Unisex'
+    'hombre',
+    'mujer',
+    'unisex'
 ] as const;
 
 export type GeneroRopa = (typeof GENEROS)[number];

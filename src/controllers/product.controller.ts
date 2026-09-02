@@ -3,66 +3,143 @@ import Product from '../models/Product';
 import User from '../models/User';
 import { AppError } from '../errors/AppError';
 import { asyncHandler } from '../middleware/errorHandler';
-import { ProductDto } from '../dtos/product.dto';
-import { CreateProductInput, UpdateProductInput } from '@/schemas/product.schema';
+import { ProductDto, PartialProductDto } from '../dtos/product.dto';
+import {
+  CreateProductInput,
+  UpdateProductInput,
+} from '@/schemas/product.schema';
 
-export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, titulo, descripcion, imagenes, estaActivo, categoria, genero, talle, color, marca, condicion } = req.body as CreateProductInput['body'];
+export const createProduct = asyncHandler(
+  async (req: Request, res: Response) => {
+    const {
+      usuarioId,
+      titulo,
+      descripcion,
+      imagenes,
+      estaActivo,
+      categoria,
+      genero,
+      talle,
+      color,
+      marca,
+      condicion,
+    } = req.body as CreateProductInput['body'];
 
-  const user = await User.findById(usuarioId);
-  if (!user) {
-    throw AppError.notFound('Usuario no encontrado');
+    const user = await User.findById(usuarioId);
+    if (!user) {
+      throw AppError.notFound('Usuario no encontrado');
+    }
+
+    const product = await Product.create({
+      usuarioId,
+      titulo,
+      descripcion,
+      imagenes,
+      estaActivo: estaActivo ?? true,
+      categoria,
+      genero,
+      talle,
+      color,
+      marca,
+      condicion,
+    });
+
+    res.status(201).json({
+      status: 'success',
+      statusCode: 201,
+      message: 'Producto creado exitosamente',
+      data: new ProductDto(product),
+    });
   }
-
-  const product = await Product.create({
-    usuarioId,
-    titulo,
-    descripcion,
-    imagenes,
-    estaActivo: estaActivo ?? true,
-    categoria,
-    genero,
-    talle, 
-    color,
-    marca, 
-    condicion
-  });
-
-  res.status(201).json({
-    status: 'success',
-    statusCode: 201,
-    message: 'Producto creado exitosamente',
-    data: new ProductDto(product)
-  });
-});
+);
 
 export const getProducts = asyncHandler(async (req: Request, res: Response) => {
-  const products = await Product.find();
+  const products = await Product.find({}).populate('usuarioId', 'ubicacion');
 
   res.status(200).json({
     status: 'success',
     statusCode: 200,
     message: 'Productos obtenidos exitosamente',
-    data: products.map(product => new ProductDto(product))
+    data: products.map((product) => new PartialProductDto(product)),
   });
 });
 
-export const getProductById = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
+export const getProductById = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
 
-  const product = await Product.findById(id);
+    const product = await Product.findById(id).populate(
+      'usuarioId',
+      'ubicacion'
+    );
 
-  if (!product) {
-    throw AppError.notFound('Producto no encontrado');
+    if (!product) {
+      throw AppError.notFound('Producto no encontrado');
+    }
+
+    res.status(200).json({
+      status: 'success',
+      statusCode: 200,
+      message: 'Producto obtenido exitosamente',
+      data: new ProductDto(product),
+    });
   }
+);
 
-  res.status(200).json({
-    status: 'success',
-    statusCode: 200,
-    message: 'Producto obtenido exitosamente',
-    data: new ProductDto(product)
-  });
-});
+export const getProductsByFilter = asyncHandler(
+  async (req: Request, res: Response) => {
+    const { categoria } = req.params;
+    const { talle, ubicacion } = req.query as {
+      talle?: string;
+      ubicacion?: string;
+    };
+
+    // Pipeline de agregación
+    const pipeline: any[] = [
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'usuarioId',
+          foreignField: '_id',
+          as: 'usuarioId',
+        },
+      },
+      {
+        $unwind: '$usuarioId',
+      },
+    ];
+
+    // Filtros dinámicos (solo si tienen valor)
+    const matchStage: any = {};
+    if (categoria) matchStage.categoria = categoria;
+    if (talle) matchStage.talle = talle;
+    if (ubicacion) matchStage['usuarioId.ubicacion'] = ubicacion;
+
+    // Solo añadir $match si hay filtros
+    if (Object.keys(matchStage).length > 0) {
+      pipeline.push({ $match: matchStage });
+    } else {
+      throw AppError.badRequest(
+        'Debes proporcionar al menos un parámetro de filtro (categoria, talle o ubicacion)'
+      );
+    }
+
+    const products = await Product.aggregate(pipeline);
+
+    if (products.length === 0) {
+      throw AppError.notFound(
+        'No se encontraron productos con los filtros especificados'
+      );
+    }
+
+    res.status(200).json({
+      status: 'success',
+      statusCode: 200,
+      message: 'Productos obtenidos exitosamente',
+      data: products.map((product) => new PartialProductDto(product)),
+    });
+  }
+);
 
 export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;

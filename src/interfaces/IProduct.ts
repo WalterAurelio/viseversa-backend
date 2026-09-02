@@ -1,4 +1,4 @@
-import type { Condicion, Color, Talle, Categoria, GeneroRopa } from '../types';
+import type { Condicion, Color, TALLES, Categoria, GeneroRopa } from '../types';
 
 interface IProduct {
   id: string;
@@ -10,10 +10,11 @@ interface IProduct {
   estaActivo: boolean;
   categoria: Categoria;
   genero: GeneroRopa;
-  talle: Talle;
-  color: Color[];
+  talle: (typeof TALLES)[number];
+  color: Color;
   marca: string;
-  condicion: Condicion;
+  condicion: Condicion; 
+  ubicacion?: string;
   comentarios: string[];
 }
 
