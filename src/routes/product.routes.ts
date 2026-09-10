@@ -1,15 +1,14 @@
-import { Router } from 'express';
-import { createProduct, getProducts, getProductById, updateProduct, deleteProduct, getProductsByFilter } from '../controllers/product.controller';
-import { validate } from '../middleware/validate';
-import { createProductSchema, updateProductSchema, getProductByIdSchema, deleteProductSchema, getProductsByFilterSchema } from '../schemas/product.schema';
+import { Router } from "express";
+import { validateIdToken } from "../middleware/validateIdToken";
+import { getProducts, createProduct, updateProductById, deleteProductById } from "../controllers/product.controller";
+import { validate } from "../middleware/validate";
+import { createProductSchema, updateProductSchema, deleteProductByIdSchema } from "../schemas/product.schema";
 
 const router = Router();
 
-router.post('/', validate(createProductSchema.shape.body), createProduct);
-router.get('/', getProducts);
-router.get('/:categoria', validate(getProductsByFilterSchema.shape.params, 'params'),getProductsByFilter);
-router.get('/:id', validate(getProductByIdSchema.shape.params, 'params'), getProductById);
-router.put('/:id', validate(updateProductSchema.shape.body), validate(getProductByIdSchema.shape.params, 'params'), updateProduct);
-router.delete('/:id', validate(deleteProductSchema.shape.params, 'params'), deleteProduct);
+router.get("/", getProducts);
+router.post("/", validateIdToken, validate(createProductSchema.shape.body), createProduct);
+router.put("/:id", validateIdToken, validate(updateProductSchema.shape.params, "params"), validate(updateProductSchema.shape.body), updateProductById);
+router.delete("/:id", validateIdToken, validate(deleteProductByIdSchema.shape.params, "params"), deleteProductById);
 
 export default router;

@@ -1,182 +1,73 @@
-import { Request, Response } from 'express';
-import Product from '../models/Product';
-import User from '../models/User';
-import { AppError } from '../errors/AppError';
-import { asyncHandler } from '../middleware/errorHandler';
-import { ProductDto, PartialProductDto } from '../dtos/product.dto';
-import {
-  CreateProductInput,
-  UpdateProductInput,
-} from '@/schemas/product.schema';
-
-export const createProduct = asyncHandler(
-  async (req: Request, res: Response) => {
-    const {
-      usuarioId,
-      titulo,
-      descripcion,
-      imagenes,
-      estaActivo,
-      categoria,
-      genero,
-      talle,
-      color,
-      marca,
-      condicion,
-    } = req.body as CreateProductInput['body'];
-
-    const user = await User.findById(usuarioId);
-    if (!user) {
-      throw AppError.notFound('Usuario no encontrado');
-    }
-
-    const product = await Product.create({
-      usuarioId,
-      titulo,
-      descripcion,
-      imagenes,
-      estaActivo: estaActivo ?? true,
-      categoria,
-      genero,
-      talle,
-      color,
-      marca,
-      condicion,
-    });
-
-    res.status(201).json({
-      status: 'success',
-      statusCode: 201,
-      message: 'Producto creado exitosamente',
-      data: new ProductDto(product),
-    });
-  }
-);
+import { Request, Response } from "express";
+import Product from "../models/Product";
+import { AppError } from "../errors/AppError";
+import { asyncHandler } from "../middleware/errorHandler";
+import { ProductCardDto } from "../dtos/product.dto";
+import { CreateProductInput, DeleteProductByIdInput, UpdateProductInput } from "../schemas/product.schema";
+import User from "../models/User";
 
 export const getProducts = asyncHandler(async (req: Request, res: Response) => {
-  const products = await Product.find({}).populate('usuarioId', 'ubicacion');
+  const products = await Product.find();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Productos obtenidos exitosamente',
-    data: products.map((product) => new PartialProductDto(product)),
+    message: "Productos obtenidos exitosamente",
+    data: products.map(product => new ProductCardDto(product))
   });
 });
 
-export const getProductById = asyncHandler(
-  async (req: Request, res: Response) => {
-    const { id } = req.params;
+export const createProduct = asyncHandler(async (req: Request, res: Response) => {
+  const firebaseUid = req.user?.uid;
+  const body = req.body as CreateProductInput["body"];
+  const user = await User.findOne({ firebaseUid });
 
-    const product = await Product.findById(id).populate(
-      'usuarioId',
-      'ubicacion'
-    );
-
-    if (!product) {
-      throw AppError.notFound('Producto no encontrado');
-    }
-
-    res.status(200).json({
-      status: 'success',
-      statusCode: 200,
-      message: 'Producto obtenido exitosamente',
-      data: new ProductDto(product),
-    });
+  if (!user) {
+    throw AppError.notFound("Usuario no encontrado");
   }
-);
 
-export const getProductsByFilter = asyncHandler(
-  async (req: Request, res: Response) => {
-    const { categoria } = req.params;
-    const { talle, ubicacion } = req.query as {
-      talle?: string;
-      ubicacion?: string;
-    };
+  const product = await Product.create({ ...body, userId: user._id });
 
-    // Pipeline de agregación
-    const pipeline: any[] = [
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'usuarioId',
-          foreignField: '_id',
-          as: 'usuarioId',
-        },
-      },
-      {
-        $unwind: '$usuarioId',
-      },
-    ];
+  res.status(201).json({
+    status: "success",
+    statusCode: 201,
+    message: "Producto creado exitosamente",
+    data: new ProductCardDto(product)
+  });
+});
 
-    // Filtros dinámicos (solo si tienen valor)
-    const matchStage: any = {};
-    if (categoria) matchStage.categoria = categoria;
-    if (talle) matchStage.talle = talle;
-    if (ubicacion) matchStage['usuarioId.ubicacion'] = ubicacion;
-
-    // Solo añadir $match si hay filtros
-    if (Object.keys(matchStage).length > 0) {
-      pipeline.push({ $match: matchStage });
-    } else {
-      throw AppError.badRequest(
-        'Debes proporcionar al menos un parámetro de filtro (categoria, talle o ubicacion)'
-      );
-    }
-
-    const products = await Product.aggregate(pipeline);
-
-    if (products.length === 0) {
-      throw AppError.notFound(
-        'No se encontraron productos con los filtros especificados'
-      );
-    }
-
-    res.status(200).json({
-      status: 'success',
-      statusCode: 200,
-      message: 'Productos obtenidos exitosamente',
-      data: products.map((product) => new PartialProductDto(product)),
-    });
-  }
-);
-
-export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const updatedData = req.body as UpdateProductInput['body'];
-
-  // Verificar que el producto existe
+export const updateProductById = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params as UpdateProductInput["params"];
+  const body = req.body as UpdateProductInput["body"];
   const product = await Product.findById(id);
+
   if (!product) {
-    throw AppError.notFound('Producto no encontrado');
+    throw AppError.notFound("Producto no encontrado");
   }
 
-  // Actualizar campos
-  const filteredUpdatedData = Object.fromEntries(Object.entries(updatedData).filter(([key, value]) => value !== undefined));
-  Object.assign(product, filteredUpdatedData);
+  Object.assign(product, body);
   const updatedProduct = await product.save();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Producto actualizado exitosamente',
-    data: new ProductDto(updatedProduct)
+    message: "Producto actualizado exitosamente",
+    data: new ProductCardDto(updatedProduct)
   });
 });
 
-export const deleteProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
+export const deleteProductById = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params as DeleteProductByIdInput["params"];
   const product = await Product.findByIdAndDelete(id);
 
   if (!product) {
-    throw AppError.notFound('Producto no encontrado');
+    throw AppError.notFound("Producto no encontrado");
   }
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Producto eliminado exitosamente',
-    data: new ProductDto(product)
+    message: "Producto eliminado exitosamente",
+    data: new ProductCardDto(product)
   });
 });
