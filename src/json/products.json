@@ -1,203 +1,191 @@
 [
   {
-    "_id": "652fa1b2f4a3c6a12d4e91a1",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a801",
-    "titulo": "Remera básica blanca",
-    "descripcion": "Remera de algodón de manga corta en excelente estado.",
-    "fechaCreacion": "2026-08-06T18:30:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/12039633/pexels-photo-12039633.jpeg?auto=compress&cs=tinysrgb&w=1200", "https://images.pexels.com/photos/18257675/pexels-photo-18257675.jpeg?_gl=1*12cirtm*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgxNjA4JGoxMSRsMCRoMA.."
+    "id": "68c0a1f24e7b9c3d5a6f1021",
+    "userId": "64b7f2e8a1c3d4f5b6e7a801",
+    "title": "Zapatillas Nike Air Max",
+    "description": "Zapatillas deportivas Nike Air Max en buen estado, ideales para uso diario.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
     ],
-    "estaActivo": true,
-    "categoria": "remeras",
-    "genero": "unisex",
-    "talle": "m",
-    "color": "blanco",
-    "marca": "Zara",
-    "condicion": "excelente estado",
-    "comentarios": []
-  },
-  {
-    "_id": "652fa1b2f4a3c6a12d4e91a2",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a802",
-    "titulo": "Camisa de lino celeste",
-    "descripcion": "Camisa de lino ideal para verano.",
-    "fechaCreacion": "2026-08-05T14:10:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/9558723/pexels-photo-9558723.jpeg?_gl=1*18vybmz*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgxNzU4JGozOSRsMCRoMA..","https://images.pexels.com/photos/8788679/pexels-photo-8788679.jpeg?_gl=1*1o5t77c*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgxOTk5JGo1OSRsMCRoMA.."
-    ],
-    "estaActivo": true,
-    "categoria": "camisas",
-    "genero": "hombre",
-    "talle": "l",
-    "color": "gris",
-    "marca": "H&M",
-    "condicion": "buen estado",
-    "comentarios": []
-  },
-  {
-    "_id": "652fa1b2f4a3c6a12d4e91a3",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a804",
-    "titulo": "Buzo oversize negro",
-    "descripcion": "Buzo con capucha, muy poco uso.",
-    "fechaCreacion": "2026-08-04T09:15:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/28701952/pexels-photo-28701952.jpeg?_gl=1*1el9ypd*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgyNTUyJGo1OSRsMCRoMA..", "https://images.pexels.com/photos/14996824/pexels-photo-14996824.jpeg?_gl=1*41day7*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgyNDI2JGoyNyRsMCRoMA.."
-    ],
-    "estaActivo": true,
-    "categoria": "buzos",
-    "genero": "unisex",
-    "talle": "xl",
+    "category": "zapatillas",
+    "gender": "unisex",
+    "size": "42",
     "color": "negro",
-    "marca": "Nike",
-    "condicion": "excelente estado",
-    "comentarios": []
+    "brand": "Nike",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-01T14:30:00.000Z",
+    "isActive": true
   },
   {
-    "_id": "652fa1b2f4a3c6a12d4e91a4",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a803",
-    "titulo": "Jean azul clásico",
-    "descripcion": "Jean de corte recto.",
-    "fechaCreacion": "2026-08-03T17:40:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/17720437/pexels-photo-17720437.jpeg?_gl=1*mfirrb*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTc4MDA1JGo1NCRsMCRoMA..",
-      "https://images.pexels.com/photos/17515363/pexels-photo-17515363.jpeg?_gl=1*wgqx06*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTc4NTE5JGoyOSRsMCRoMA.."
+    "id": "68c0a2b35f8d1e4a7c9b2032",
+    "userId": "64b7f2e8a1c3d4f5b6e7a802",
+    "title": "Campera de jean clásica",
+    "description": "Campera de jean azul claro, corte clásico y poco uso.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
     ],
-    "estaActivo": true,
-    "categoria": "pantalones",
-    "genero": "mujer",
-    "talle": "s",
-    "color": "celeste",
-    "marca": "Levi's",
-    "condicion": "buen estado",
-    "comentarios": []
-  },
-  {
-    "_id": "652fa1b2f4a3c6a12d4e91a5",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a805",
-    "titulo": "Vestido floral",
-    "descripcion": "Vestido largo estampado, ideal para primavera.",
-    "fechaCreacion": "2026-08-02T20:05:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/38547151/pexels-photo-38547151.jpeg?_gl=1*1i9rzu5*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTc5NzY1JGozNSRsMCRoMA..",
-      "https://images.pexels.com/photos/38563276/pexels-photo-38563276.jpeg?_gl=1*6dsf7n*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTc5NjkzJGo3JGwwJGgw"
-    ],
-    "estaActivo": true,
-    "categoria": "vestidos",
-    "genero": "mujer",
-    "talle": "m",
-    "color": "celeste",
-    "marca": "Forever 21",
-    "condicion": "excelente estado",
-    "comentarios": []
-  },
-  {
-    "_id": "652fa1b2f4a3c6a12d4e91a6",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a806",
-    "titulo": "Zapatillas deportivas",
-    "descripcion": "Zapatillas cómodas para uso diario.",
-    "fechaCreacion": "2026-08-01T11:50:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/33629872/pexels-photo-33629872.jpeg?_gl=1*tvhxwy*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgwOTkzJGo1MiRsMCRoMA..", "https://images.pexels.com/photos/33629780/pexels-photo-33629780.jpeg?_gl=1*1p15eiu*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgxMTU0JGozOCRsMCRoMA..", "https://images.pexels.com/photos/18202568/pexels-photo-18202568.jpeg?_gl=1*17xywmg*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgxMjY5JGo1OSRsMCRoMA.."
-    ],
-    "estaActivo": false,
-    "categoria": "calzado",
-    "genero": "unisex",
-    "talle": "42",
-    "color": "blanco",
-    "marca": "Adidas",
-    "condicion": "estado aceptable",
-    "comentarios": []
-  },
-  {
-    "_id": "652fa1b2f4a3c6a12d4e91a7",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a807",
-    "titulo": "Campera de jean",
-    "descripcion": "Campera clásica de jean azul.",
-    "fechaCreacion": "2026-07-31T16:20:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/13652610/pexels-photo-13652610.jpeg?auto=compress&cs=tinysrgb&w=1200", "https://images.pexels.com/photos/13662420/pexels-photo-13662420.jpeg?_gl=1*1jtpls6*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgwNzkwJGo1NyRsMCRoMA.."
-    ],
-    "estaActivo": true,
-    "categoria": "abrigos",
-    "genero": "unisex",
-    "talle": "l",
+    "category": "campera",
+    "gender": "unisex",
+    "size": "M",
     "color": "azul",
-    "marca": "Wrangler",
-    "condicion": "buen estado",
-    "comentarios": []
+    "brand": "Levi's",
+    "condition": "bueno",
+    "createdAt": "2026-09-02T10:15:00.000Z",
+    "isActive": true
   },
   {
-    "_id": "652fa1b2f4a3c6a12d4e91a8",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a808",
-    "titulo": "Mochila urbana",
-    "descripcion": "Mochila con varios compartimentos.",
-    "fechaCreacion": "2026-07-30T13:35:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/2081199/pexels-photo-2081199.jpeg?_gl=1*zs99sn*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgwNDgzJGo1OSRsMCRoMA..", "https://images.pexels.com/photos/2081202/pexels-photo-2081202.jpeg?_gl=1*rl48t8*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODcxNzc0NTYkbzE5JGcxJHQxNzg3MTgwNjQxJGo1OSRsMCRoMA.."
+    "id": "68c0a3c46a9e2f5b8d1c3043",
+    "userId": "64b7f2e8a1c3d4f5b6e7a803",
+    "title": "Remera oversize blanca",
+    "description": "Remera blanca de algodón con calce oversize.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
     ],
-    "estaActivo": true,
-    "categoria": "accesorios",
-    "genero": "unisex",
-    "talle": "m",
-    "color": "marron",
-    "marca": "Samsonite",
-    "condicion": "nuevo",
-    "comentarios": []
-  },
-  {
-    "_id": "652fa1b2f4a3c6a12d4e91a9",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a807",
-    "titulo": "Zapatillas deportivas",
-    "descripcion": "Zapatillas cómodas para uso diario.",
-    "fechaCreacion": "2026-08-01T11:50:00.000Z",
-    "imagenes": [
-      "https://images.unsplash.com/photo-1579198413527-1d9d1a80dff8?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    ],
-    "estaActivo": false,
-    "categoria": "calzado",
-    "genero": "unisex",
-    "talle": "40",
-    "color": "multicolor",
-    "marca": "Nike",
-    "condicion": "excelente estado",
-    "comentarios": []
-  },
-  {
-    "_id": "652fa1b2f4a3c6a12d4e91aa",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a80a",
-    "titulo": "Zapatillas deportivas",
-    "descripcion": "Zapatillas cómodas para uso diario.",
-    "fechaCreacion": "2026-08-01T11:50:00.000Z",
-    "imagenes": [
-      "https://images.unsplash.com/photo-1637208701243-5101a27725b5?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "http://images.unsplash.com/photo-1637208697637-3e70c9030385?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    ],
-    "estaActivo": false,
-    "categoria": "calzado",
-    "genero": "unisex",
-    "talle": "43",
+    "category": "remera",
+    "gender": "unisex",
+    "size": "L",
     "color": "blanco",
-    "marca": "Nike",
-    "condicion": "nuevo",
-    "comentarios": []
+    "brand": "Adidas",
+    "condition": "nuevo",
+    "createdAt": "2026-09-03T16:45:00.000Z",
+    "isActive": true
   },
   {
-    "_id": "652fa1b2f4a3c6a12d4e91ab",
-    "usuarioId": "64b7f2e8a1c3d4f5b6e7a809",
-    "titulo": "Botas invernales",
-    "descripcion": "Estas botas de cuero azul marino destacan por su tacón grueso de madera y detalle de hebilla lateral.",
-    "fechaCreacion": "2026-08-01T11:50:00.000Z",
-    "imagenes": [
-      "https://images.pexels.com/photos/26851202/pexels-photo-26851202.jpeg?_gl=1*1hzhpno*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODc4NjcxMzQkbzI0JGcxJHQxNzg3ODY3NDE1JGo1OSRsMCRoMA..",
-      "https://images.pexels.com/photos/27256466/pexels-photo-27256466.jpeg?_gl=1*6c8l0o*_ga*MTYwNTQ3MjM3LjE3NTYzMzQ0MTI.*_ga_8JE65Q40S6*czE3ODc4NjcxMzQkbzI0JGcxJHQxNzg3ODY3MTgxJGoxMyRsMCRoMA.."
+    "id": "68c0a4d57b0f3a6c9e2d4154",
+    "userId": "64b7f2e8a1c3d4f5b6e7a804",
+    "title": "Pantalón cargo beige",
+    "description": "Pantalón cargo beige con múltiples bolsillos y ajuste cómodo.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
     ],
-    "estaActivo": true,
-    "categoria": "calzado",
-    "genero": "mujer",
-    "talle": "38",
-    "color": "azul",
-    "marca": "Sin marca",
-    "condicion": "buen estado",
-    "comentarios": []
+    "category": "pantalon",
+    "gender": "masculino",
+    "size": "42",
+    "color": "beige",
+    "brand": "Zara",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-04T09:20:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0a5e68c1a4b7d0f3e5265",
+    "userId": "64b7f2e8a1c3d4f5b6e7a805",
+    "title": "Buzo con capucha gris",
+    "description": "Buzo gris con capucha, interior abrigado y bolsillo frontal.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "buzo",
+    "gender": "unisex",
+    "size": "M",
+    "color": "gris",
+    "brand": "Nike",
+    "condition": "bueno",
+    "createdAt": "2026-09-04T18:10:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0a6f79d2b5c8e1a4f6376",
+    "userId": "64b7f2e8a1c3d4f5b6e7a806",
+    "title": "Zapatillas Converse Chuck Taylor",
+    "description": "Converse clásicas de lona negra, con detalles de uso normales.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "zapatillas",
+    "gender": "unisex",
+    "size": "39",
+    "color": "negro",
+    "brand": "Converse",
+    "condition": "bueno",
+    "createdAt": "2026-09-05T12:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0a708ae3c6d9f2b5e7487",
+    "userId": "64b7f2e8a1c3d4f5b6e7a807",
+    "title": "Vestido floral",
+    "description": "Vestido corto con estampado floral, liviano y cómodo para primavera.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "vestido",
+    "gender": "femenino",
+    "size": "S",
+    "color": "verde",
+    "brand": "H&M",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-05T15:30:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0a819bf4d7e0a3c6f8598",
+    "userId": "64b7f2e8a1c3d4f5b6e7a808",
+    "title": "Camisa a cuadros",
+    "description": "Camisa de algodón a cuadros rojos y negros, corte regular.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "camisa",
+    "gender": "masculino",
+    "size": "L",
+    "color": "rojo",
+    "brand": "Uniqlo",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-06T11:45:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0a92ac05e8f1b4d7a9609",
+    "userId": "64b7f2e8a1c3d4f5b6e7a809",
+    "title": "Zapatillas Adidas Forum",
+    "description": "Zapatillas Adidas Forum blancas con detalles azules.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "zapatillas",
+    "gender": "unisex",
+    "size": "40",
+    "color": "blanco",
+    "brand": "Adidas",
+    "condition": "nuevo",
+    "createdAt": "2026-09-07T13:20:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0aa3bd16f9a2c5e8b0710",
+    "userId": "64b7f2e8a1c3d4f5b6e7a80a",
+    "title": "Pollera negra plisada",
+    "description": "Pollera negra plisada de tiro alto, en excelente estado.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "pollera",
+    "gender": "femenino",
+    "size": "M",
+    "color": "negro",
+    "brand": "Forever 21",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-08T17:00:00.000Z",
+    "isActive": true
   }
 ]
