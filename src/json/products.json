@@ -18,6 +18,26 @@
     "isActive": true
   },
   {
+    "id": "68c0a6f79d2b5c8e1a4f6376",
+    "userId": "64b7f2e8a1c3d4f5b6e7a806",
+    "title": "Zapatillas Converse Chuck Taylor",
+    "description": "Converse clásicas de lona negra, con detalles de uso normales.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "zapatillas",
+    "gender": "unisex",
+    "size": "39",
+    "color": "negro",
+    "brand": "Converse",
+    "condition": "bueno",
+    "createdAt": "2026-09-05T12:00:00.000Z",
+    "isActive": true
+  },
+  {
     "id": "68c0a2b35f8d1e4a7c9b2032",
     "userId": "64b7f2e8a1c3d4f5b6e7a802",
     "title": "Campera de jean clásica",
@@ -34,6 +54,24 @@
     "brand": "Levi's",
     "condition": "bueno",
     "createdAt": "2026-09-02T10:15:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0a708ae3c6d9f2b5e7487",
+    "userId": "64b7f2e8a1c3d4f5b6e7a807",
+    "title": "Campera liviana impermeable",
+    "description": "Campera liviana de color verde oliva, ideal para días frescos y lluviosos.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "campera",
+    "gender": "unisex",
+    "size": "L",
+    "color": "verde",
+    "brand": "Columbia",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-06T11:45:00.000Z",
     "isActive": true
   },
   {
@@ -57,6 +95,25 @@
     "isActive": true
   },
   {
+    "id": "68c0a819bf4d7e0a3c6f8598",
+    "userId": "64b7f2e8a1c3d4f5b6e7a808",
+    "title": "Remera básica roja",
+    "description": "Remera de algodón roja, de corte regular y cómoda para uso diario.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "remera",
+    "gender": "masculino",
+    "size": "M",
+    "color": "rojo",
+    "brand": "Uniqlo",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-06T13:00:00.000Z",
+    "isActive": true
+  },
+  {
     "id": "68c0a4d57b0f3a6c9e2d4154",
     "userId": "64b7f2e8a1c3d4f5b6e7a804",
     "title": "Pantalón cargo beige",
@@ -72,6 +129,24 @@
     "brand": "Zara",
     "condition": "muy_bueno",
     "createdAt": "2026-09-04T09:20:00.000Z",
+    "isActive": true
+  },
+  {
+    "id": "68c0aa3bd16f9a2c5e8b0710",
+    "userId": "64b7f2e8a1c3d4f5b6e7a80a",
+    "title": "Pantalón chino negro",
+    "description": "Pantalón chino negro de corte recto, versátil y en excelente estado.",
+    "images": [
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
+      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
+    ],
+    "category": "pantalon",
+    "gender": "unisex",
+    "size": "40",
+    "color": "negro",
+    "brand": "H&M",
+    "condition": "muy_bueno",
+    "createdAt": "2026-09-08T17:00:00.000Z",
     "isActive": true
   },
   {
@@ -94,98 +169,23 @@
     "isActive": true
   },
   {
-    "id": "68c0a6f79d2b5c8e1a4f6376",
-    "userId": "64b7f2e8a1c3d4f5b6e7a806",
-    "title": "Zapatillas Converse Chuck Taylor",
-    "description": "Converse clásicas de lona negra, con detalles de uso normales.",
-    "images": [
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
-    ],
-    "category": "zapatillas",
-    "gender": "unisex",
-    "size": "39",
-    "color": "negro",
-    "brand": "Converse",
-    "condition": "bueno",
-    "createdAt": "2026-09-05T12:00:00.000Z",
-    "isActive": true
-  },
-  {
-    "id": "68c0a708ae3c6d9f2b5e7487",
-    "userId": "64b7f2e8a1c3d4f5b6e7a807",
-    "title": "Vestido floral",
-    "description": "Vestido corto con estampado floral, liviano y cómodo para primavera.",
-    "images": [
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
-    ],
-    "category": "vestido",
-    "gender": "femenino",
-    "size": "S",
-    "color": "verde",
-    "brand": "H&M",
-    "condition": "muy_bueno",
-    "createdAt": "2026-09-05T15:30:00.000Z",
-    "isActive": true
-  },
-  {
-    "id": "68c0a819bf4d7e0a3c6f8598",
-    "userId": "64b7f2e8a1c3d4f5b6e7a808",
-    "title": "Camisa a cuadros",
-    "description": "Camisa de algodón a cuadros rojos y negros, corte regular.",
-    "images": [
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
-    ],
-    "category": "camisa",
-    "gender": "masculino",
-    "size": "L",
-    "color": "rojo",
-    "brand": "Uniqlo",
-    "condition": "muy_bueno",
-    "createdAt": "2026-09-06T11:45:00.000Z",
-    "isActive": true
-  },
-  {
     "id": "68c0a92ac05e8f1b4d7a9609",
     "userId": "64b7f2e8a1c3d4f5b6e7a809",
-    "title": "Zapatillas Adidas Forum",
-    "description": "Zapatillas Adidas Forum blancas con detalles azules.",
+    "title": "Buzo oversize azul marino",
+    "description": "Buzo oversize azul marino, suave y cómodo para uso diario.",
     "images": [
       "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
       "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
       "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
       "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
     ],
-    "category": "zapatillas",
+    "category": "buzo",
     "gender": "unisex",
-    "size": "40",
-    "color": "blanco",
+    "size": "XL",
+    "color": "azul",
     "brand": "Adidas",
     "condition": "nuevo",
     "createdAt": "2026-09-07T13:20:00.000Z",
-    "isActive": true
-  },
-  {
-    "id": "68c0aa3bd16f9a2c5e8b0710",
-    "userId": "64b7f2e8a1c3d4f5b6e7a80a",
-    "title": "Pollera negra plisada",
-    "description": "Pollera negra plisada de tiro alto, en excelente estado.",
-    "images": [
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500",
-      "https://www.iconicindia.com/cdn/shop/articles/men-thedesign.jpg?v=1711088746&width=1500"
-    ],
-    "category": "pollera",
-    "gender": "femenino",
-    "size": "M",
-    "color": "negro",
-    "brand": "Forever 21",
-    "condition": "muy_bueno",
-    "createdAt": "2026-09-08T17:00:00.000Z",
     "isActive": true
   }
 ]
