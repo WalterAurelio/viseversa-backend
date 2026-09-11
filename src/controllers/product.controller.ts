@@ -17,6 +17,30 @@ export const getProducts = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
+export const getProductsByCategory = asyncHandler(async (req: Request, res: Response) => {
+  const { category } = req.params;
+  const queries = req.query as Record<string, string | string[]>;
+  const dbQuery: Record<string, unknown> = { category };
+
+  for (const [key, value] of Object.entries(queries)) {
+    if (key === "location") {
+      const users = await User.find({ location: value }).select("_id");
+      const userIds = users.map(user => user._id);
+      dbQuery.userId = { $in: userIds };
+    } else {
+      dbQuery[key] = Array.isArray(value) ? { $in: value } : value;
+    }
+  }
+  const products = await Product.find(dbQuery);
+
+  res.status(200).json({
+    status: "success",
+    statusCode: 200,
+    message: "Productos obtenidos exitosamente",
+    data: products.map(product => new ProductCardDto(product))
+  });
+});
+
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
   const firebaseUid = req.user?.uid;
   const body = req.body as CreateProductInput["body"];
