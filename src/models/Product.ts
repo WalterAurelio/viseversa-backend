@@ -1,5 +1,10 @@
 import mongoose, { Document, Schema } from "mongoose";
 import IProduct from "../interfaces/IProduct";
+import { categories } from "../types/Category";
+import { genders } from "../types/Gender";
+import { numericSizes, letterSizes } from "../types/Size";
+import { colors } from "../types/Colour";
+import { conditions } from "../types/Condition";
 
 export interface IProductDocument extends Omit<IProduct, "id" | "userId">, Document {
   _id: mongoose.Types.ObjectId;
@@ -33,21 +38,25 @@ const productSchema = new Schema<IProductDocument>(
     },
     category: {
       type: String,
+      enum: categories,
       required: [true, "La categoría es requerida"],
       trim: true
     },
     gender: {
       type: String,
+      enum: genders,
       required: [true, "El género es requerido"],
       trim: true
     },
     size: {
       type: String,
+      enum: [...numericSizes, ...letterSizes],
       required: [true, "El talle es requerido"],
       trim: true
     },
     color: {
       type: String,
+      enum: colors,
       required: [true, "El color es requerido"],
       trim: true
     },
@@ -58,6 +67,7 @@ const productSchema = new Schema<IProductDocument>(
     },
     condition: {
       type: String,
+      enum: conditions,
       required: [true, "La condición es requerida"],
       trim: true
     },
