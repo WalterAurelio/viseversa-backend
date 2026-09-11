@@ -1,17 +1,33 @@
 import { z } from "zod";
+import { categories } from "../types/Category";
+import { genders } from "../types/Gender";
+import { colors } from "../types/Colour";
+import { conditions } from "../types/Condition";
+import { sizeByCategory } from "../types/Size";
 
 export const createProductSchema = z.object({
-  body: z.object({
-    title: z.string().min(1, "El título es requerido"),
-    description: z.string().min(1, "La descripción es requerida"),
-    images: z.array(z.string()).min(1, "Se requiere al menos una imagen"),
-    category: z.string().min(1, "La categoría es requerida"),
-    gender: z.string().min(1, "El género es requerido"),
-    size: z.string().min(1, "La talla es requerida"),
-    color: z.string().min(1, "El color es requerido"),
-    brand: z.string().min(1, "La marca es requerida"),
-    condition: z.string().min(1, "La condición es requerida")
-  })
+  body: z
+    .object({
+      title: z.string().min(1, "El título es requerido"),
+      description: z.string().min(1, "La descripción es requerida"),
+      images: z.array(z.string()).min(1, "Se requiere al menos una imagen"),
+      category: z.enum(categories, { message: "La categoría es inválida" }),
+      gender: z.enum(genders, { message: "El género es inválido" }),
+      size: z.string().min(1, "La talla es requerida"),
+      color: z.enum(colors, { message: "El color es inválido" }),
+      brand: z.string().min(1, "La marca es requerida"),
+      condition: z.enum(conditions, { message: "La condición es inválida" })
+    })
+    .refine(
+      ({ category, size }) => {
+        const validSizes = sizeByCategory[category] as readonly string[];
+        return validSizes.includes(size);
+      },
+      {
+        path: ["size"],
+        message: "La talla no es válida para la categoría seleccionada"
+      }
+    )
 });
 
 export const getProductByIdSchema = z.object({
@@ -21,7 +37,7 @@ export const getProductByIdSchema = z.object({
 });
 
 export const updateProductSchema = z.object({
-  body: createProductSchema.shape.body.partial(),
+  body: createProductSchema.shape.body,
   params: getProductByIdSchema.shape.params
 });
 
