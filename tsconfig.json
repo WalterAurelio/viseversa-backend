@@ -13,21 +13,9 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "moduleResolution": "node",
-    "ignoreDeprecations": "6.0",
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["./*"],
-      "@config/*": ["./config/*"],
-      "@models/*": ["./models/*"],
-      "@controllers/*": ["./controllers/*"],
-      "@routes/*": ["./routes/*"],
-      "@schemas/*": ["./schemas/*"],
-      "@middleware/*": ["./middleware/*"],
-      "@types/*": ["./types/*"],
-      "@errors/*": ["./errors/*"]
-    }
+    // "moduleResolution": "node",
+    // "ignoreDeprecations": "6.0",
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
