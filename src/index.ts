@@ -1,18 +1,16 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import './firebase/app';
-import app from './app';
-import { connectDB } from './config/database';
+import "./firebase/app";
+import app from "./app";
+import { connectDb } from "./config/database";
 
 const PORT = process.env.PORT || 3000;
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 const startServer = async () => {
   try {
-    // Conectar a MongoDB
-    await connectDB();
+    await connectDb();
 
-    // Iniciar servidor
     app.listen(PORT, () => {
       console.log(`
 ========================================
@@ -25,7 +23,7 @@ const startServer = async () => {
       `);
     });
   } catch (error) {
-    console.error('❌ Error iniciando el servidor:', error);
+    console.error("❌ Error iniciando el servidor:", error);
     process.exit(1);
   }
 };
