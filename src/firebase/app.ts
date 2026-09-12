@@ -1,10 +1,14 @@
-import { initializeApp, cert, ServiceAccount, getApps, getApp } from 'firebase-admin/app';
-import serviceAccount from './firebase-service-account.json';
+import { initializeApp, cert, ServiceAccount, getApps, getApp } from "firebase-admin/app";
+const serviceAccount = {
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n")
+} as ServiceAccount;
 
 const app =
   getApps().length === 0
     ? initializeApp({
-        credential: cert(serviceAccount as ServiceAccount)
+        credential: cert(serviceAccount)
       })
     : getApp();
 
