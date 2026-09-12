@@ -1,105 +1,97 @@
-import { Request, Response } from 'express';
-import Product from '../models/Product';
-import User from '../models/User';
-import { AppError } from '../errors/AppError';
-import { asyncHandler } from '../middleware/errorHandler';
-import { ProductDto } from '../dtos/product.dto';
-import { CreateProductInput, UpdateProductInput } from '@/schemas/product.schema';
-
-export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, titulo, descripcion, imagenes, estaActivo, categoria, genero, talle, color, marca, condicion } = req.body as CreateProductInput['body'];
-
-  const user = await User.findById(usuarioId);
-  if (!user) {
-    throw AppError.notFound('Usuario no encontrado');
-  }
-
-  const product = await Product.create({
-    usuarioId,
-    titulo,
-    descripcion,
-    imagenes,
-    estaActivo: estaActivo ?? true,
-    categoria,
-    genero,
-    talle, 
-    color,
-    marca, 
-    condicion
-  });
-
-  res.status(201).json({
-    status: 'success',
-    statusCode: 201,
-    message: 'Producto creado exitosamente',
-    data: new ProductDto(product)
-  });
-});
+import { Request, Response } from "express";
+import Product from "../models/Product";
+import { AppError } from "../errors/AppError";
+import { asyncHandler } from "../middleware/errorHandler";
+import { ProductCardDto } from "../dtos/product.dto";
+import { CreateProductInput, DeleteProductByIdInput, UpdateProductInput } from "../schemas/product.schema";
+import User from "../models/User";
 
 export const getProducts = asyncHandler(async (req: Request, res: Response) => {
   const products = await Product.find();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Productos obtenidos exitosamente',
-    data: products.map(product => new ProductDto(product))
+    message: "Productos obtenidos exitosamente",
+    data: products.map(product => new ProductCardDto(product))
   });
 });
 
-export const getProductById = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
+export const getProductsByCategory = asyncHandler(async (req: Request, res: Response) => {
+  const { category } = req.params;
+  const queries = req.query as Record<string, string | string[]>;
+  const dbQuery: Record<string, unknown> = { category };
 
-  const product = await Product.findById(id);
-
-  if (!product) {
-    throw AppError.notFound('Producto no encontrado');
+  for (const [key, value] of Object.entries(queries)) {
+    if (key === "location") {
+      const users = await User.find({ location: value }).select("_id");
+      const userIds = users.map(user => user._id);
+      dbQuery.userId = { $in: userIds };
+    } else {
+      dbQuery[key] = Array.isArray(value) ? { $in: value } : value;
+    }
   }
+  const products = await Product.find(dbQuery);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Producto obtenido exitosamente',
-    data: new ProductDto(product)
+    message: "Productos obtenidos exitosamente",
+    data: products.map(product => new ProductCardDto(product))
   });
 });
 
-export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const updatedData = req.body as UpdateProductInput['body'];
+export const createProduct = asyncHandler(async (req: Request, res: Response) => {
+  const firebaseUid = req.user?.uid;
+  const body = req.body as CreateProductInput["body"];
+  const user = await User.findOne({ firebaseUid });
 
-  // Verificar que el producto existe
-  const product = await Product.findById(id);
-  if (!product) {
-    throw AppError.notFound('Producto no encontrado');
+  if (!user) {
+    throw AppError.notFound("Usuario no encontrado");
   }
 
-  // Actualizar campos
-  const filteredUpdatedData = Object.fromEntries(Object.entries(updatedData).filter(([key, value]) => value !== undefined));
-  Object.assign(product, filteredUpdatedData);
+  const product = await Product.create({ ...body, userId: user._id });
+
+  res.status(201).json({
+    status: "success",
+    statusCode: 201,
+    message: "Producto creado exitosamente",
+    data: new ProductCardDto(product)
+  });
+});
+
+export const updateProductById = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params as UpdateProductInput["params"];
+  const body = req.body as UpdateProductInput["body"];
+  const product = await Product.findById(id);
+
+  if (!product) {
+    throw AppError.notFound("Producto no encontrado");
+  }
+
+  Object.assign(product, body);
   const updatedProduct = await product.save();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Producto actualizado exitosamente',
-    data: new ProductDto(updatedProduct)
+    message: "Producto actualizado exitosamente",
+    data: new ProductCardDto(updatedProduct)
   });
 });
 
-export const deleteProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
+export const deleteProductById = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params as DeleteProductByIdInput["params"];
   const product = await Product.findByIdAndDelete(id);
 
   if (!product) {
-    throw AppError.notFound('Producto no encontrado');
+    throw AppError.notFound("Producto no encontrado");
   }
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Producto eliminado exitosamente',
-    data: new ProductDto(product)
+    message: "Producto eliminado exitosamente",
+    data: new ProductCardDto(product)
   });
 });

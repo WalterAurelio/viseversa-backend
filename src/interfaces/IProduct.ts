@@ -1,20 +1,22 @@
-import type { Condicion, Color, Talle, Categoria, GeneroRopa } from '../types';
+import { Category } from "../types/Category";
+import { Gender } from "../types/Gender";
+import { Size } from "../types/Size";
+import { Color } from "../types/Colour";
+import { Condition } from "../types/Condition";
 
 interface IProduct {
   id: string;
-  usuarioId: string;
-  titulo: string;
-  descripcion: string;
-  fechaCreacion: Date;
-  imagenes: string[];
-  estaActivo: boolean;
-  categoria: Categoria;
-  genero: GeneroRopa;
-  talle: Talle;
-  color: Color[];
-  marca: string;
-  condicion: Condicion;
-  comentarios: string[];
+  userId: string;
+  title: string;
+  description: string;
+  images: string[];
+  category: Category;
+  gender: Gender;
+  size: Size;
+  color: Color;
+  brand: string;
+  condition: Condition;
+  isActive: boolean;
 }
 
 export default IProduct;

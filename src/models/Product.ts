@@ -1,72 +1,86 @@
-import mongoose, { Schema, Document, Types } from 'mongoose';
-import { PRODUCT } from '../utils/validation';
-import IProduct from '../interfaces/IProduct';
+import mongoose, { Document, Schema } from "mongoose";
+import IProduct from "../interfaces/IProduct";
+import { categories } from "../types/Category";
+import { genders } from "../types/Gender";
+import { numericSizes, letterSizes } from "../types/Size";
+import { colors } from "../types/Colour";
+import { conditions } from "../types/Condition";
 
-export interface IProductDocument
-  extends Omit<IProduct, 'id' | 'usuarioId' | 'comentarios'>, Document {
-  _id: Types.ObjectId;
-  usuarioId: Types.ObjectId;
-  comentarios: Types.ObjectId[];
+export interface IProductDocument extends Omit<IProduct, "id" | "userId">, Document {
+  _id: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId;
 }
 
 const productSchema = new Schema<IProductDocument>(
   {
-    usuarioId: {
+    userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, 'El ID del usuario es requerido'],
+      ref: "User",
+      required: [true, "El ID del usuario es requerido"]
     },
-    titulo: {
+    title: {
       type: String,
-      required: [true, 'El título del producto es requerido'],
+      required: [true, "El título es requerido"],
       trim: true,
-      minlength: [PRODUCT.TITLE.MIN_LENGTH, PRODUCT.TITLE.MIN_LENGTH_MESSAGE],
-      maxlength: [PRODUCT.TITLE.MAX_LENGTH, PRODUCT.TITLE.MAX_LENGTH_MESSAGE],
+      minlength: [3, "El título debe tener al menos 3 caracteres"],
+      maxlength: [100, "El título no puede exceder 100 caracteres"]
     },
-    descripcion: {
+    description: {
       type: String,
-      required: [true, 'La descripción es requerida'],
+      required: [true, "La descripción es requerida"],
       trim: true,
-      minlength: [
-        PRODUCT.DESCRIPTION.MIN_LENGTH,
-        PRODUCT.DESCRIPTION.MIN_LENGTH_MESSAGE,
-      ],
-      maxlength: [
-        PRODUCT.DESCRIPTION.MAX_LENGTH,
-        PRODUCT.DESCRIPTION.MAX_LENGTH_MESSAGE,
-      ],
+      minlength: [10, "La descripción debe tener al menos 10 caracteres"],
+      maxlength: [1000, "La descripción no puede exceder 1000 caracteres"]
     },
-    fechaCreacion: { type: Date, default: Date.now },
-    imagenes: {
+    images: {
       type: [String],
-      default: [],
+      default: []
     },
-    estaActivo: {
+    category: {
+      type: String,
+      enum: categories,
+      required: [true, "La categoría es requerida"],
+      trim: true
+    },
+    gender: {
+      type: String,
+      enum: genders,
+      required: [true, "El género es requerido"],
+      trim: true
+    },
+    size: {
+      type: String,
+      enum: [...numericSizes, ...letterSizes],
+      required: [true, "El talle es requerido"],
+      trim: true
+    },
+    color: {
+      type: String,
+      enum: colors,
+      required: [true, "El color es requerido"],
+      trim: true
+    },
+    brand: {
+      type: String,
+      required: [true, "La marca es requerida"],
+      trim: true
+    },
+    condition: {
+      type: String,
+      enum: conditions,
+      required: [true, "La condición es requerida"],
+      trim: true
+    },
+    isActive: {
       type: Boolean,
-      default: true,
-    },
-    categoria: { type: String, required: [true, 'La categoría es requerida'] },
-    genero: { type: String, required: [true, 'El género es requerido'] },
-    talle: { type: String, required: [true, 'El talle es requerido'] },
-    color: { type: [String], required: [true, 'El color es requerido'] },
-    marca: { type: String, required: [true, 'La marca es requerida'] },
-    condicion: { type: String, required: [true, 'La condicion es requerida'] },
-    comentarios: {
-      type: [Schema.Types.ObjectId],
-      ref: 'Comment',
-      default: [],
-    },
+      default: true
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-// Índices para optimizar búsquedas
-productSchema.index({ usuarioId: 1 });
-productSchema.index({ estaActivo: 1 });
-productSchema.index({ comentarios: 1 });
-
-const Product = mongoose.model<IProductDocument>('Product', productSchema);
+const Product = mongoose.model<IProductDocument>("Product", productSchema);
 
 export default Product;

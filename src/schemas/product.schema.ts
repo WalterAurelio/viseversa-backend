@@ -1,90 +1,49 @@
-import { z } from 'zod';
-import { PRODUCT } from '../utils/validation';
-import { CONDICIONES } from '../types/condicion';
-import { TALLES } from '../types/talle';
-import { COLORES } from '../types/color';
-import { CATEGORIAS } from '../types/categoria';
-import { GENEROS } from '../types/generoRopa';
+import { z } from "zod";
+import { categories } from "../types/Category";
+import { genders } from "../types/Gender";
+import { colors } from "../types/Colour";
+import { conditions } from "../types/Condition";
+import { sizeByCategory } from "../types/Size";
 
-// Esquema para crear producto
 export const createProductSchema = z.object({
-  body: z.object({
-    usuarioId: z.string().refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'ID de usuario inválido',
-    }),
-    titulo: z
-      .string()
-      .min(PRODUCT.TITLE.MIN_LENGTH, PRODUCT.TITLE.MIN_LENGTH_MESSAGE)
-      .max(PRODUCT.TITLE.MAX_LENGTH, PRODUCT.TITLE.MAX_LENGTH_MESSAGE),
-    descripcion: z
-      .string()
-      .min(
-        PRODUCT.DESCRIPTION.MIN_LENGTH,
-        PRODUCT.DESCRIPTION.MIN_LENGTH_MESSAGE
-      )
-      .max(
-        PRODUCT.DESCRIPTION.MAX_LENGTH,
-        PRODUCT.DESCRIPTION.MAX_LENGTH_MESSAGE
-      ),
-    imagenes: z.array(z.string()).optional(),
-    estaActivo: z.boolean().optional(),
-    categoria: z.enum(CATEGORIAS),
-    genero: z.enum(GENEROS),
-    talle: z.enum(TALLES),
-    color: z.enum(COLORES).array(),
-    marca: z.string(),
-    condicion: z.enum(CONDICIONES),
-  }),
+  body: z
+    .object({
+      title: z.string().min(1, "El título es requerido"),
+      description: z.string().min(1, "La descripción es requerida"),
+      images: z.array(z.string()).min(1, "Se requiere al menos una imagen"),
+      category: z.enum(categories, { message: "La categoría es inválida" }),
+      gender: z.enum(genders, { message: "El género es inválido" }),
+      size: z.string().min(1, "La talla es requerida"),
+      color: z.enum(colors, { message: "El color es inválido" }),
+      brand: z.string().min(1, "La marca es requerida"),
+      condition: z.enum(conditions, { message: "La condición es inválida" })
+    })
+    .refine(
+      ({ category, size }) => {
+        const validSizes = sizeByCategory[category] as readonly string[];
+        return validSizes.includes(size);
+      },
+      {
+        path: ["size"],
+        message: "La talla no es válida para la categoría seleccionada"
+      }
+    )
 });
 
-// Esquema para actualizar producto
-export const updateProductSchema = z.object({
-  body: z.object({
-    titulo: z
-      .string()
-      .min(PRODUCT.TITLE.MIN_LENGTH, PRODUCT.TITLE.MIN_LENGTH_MESSAGE)
-      .max(PRODUCT.TITLE.MAX_LENGTH, PRODUCT.TITLE.MAX_LENGTH_MESSAGE)
-      .optional(),
-    descripcion: z
-      .string()
-      .min(
-        PRODUCT.DESCRIPTION.MIN_LENGTH,
-        PRODUCT.DESCRIPTION.MIN_LENGTH_MESSAGE
-      )
-      .max(
-        PRODUCT.DESCRIPTION.MAX_LENGTH,
-        PRODUCT.DESCRIPTION.MAX_LENGTH_MESSAGE
-      )
-      .optional(),
-    imagenes: z.array(z.string()).optional(),
-    estaActivo: z.boolean().optional(),
-    categoria: z.enum(CATEGORIAS).optional(),
-    genero: z.enum(GENEROS).optional(),
-    talle: z.enum(TALLES).optional(),
-    color: z.enum(COLORES).array().optional(),
-    marca: z.string().optional(),
-    condicion: z.enum(CONDICIONES).optional(),
-  }),
-});
-
-// Esquema para obtener producto por ID
 export const getProductByIdSchema = z.object({
   params: z.object({
-    id: z.string().refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'ID inválido',
-    }),
-  }),
+    id: z.string().regex(/^[0-9a-fA-F]{24}$/, "ID inválido")
+  })
 });
 
-// Esquema para eliminar producto
-export const deleteProductSchema = z.object({
-  params: z.object({
-    id: z.string().refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'ID inválido',
-    }),
-  }),
+export const updateProductSchema = z.object({
+  body: createProductSchema.shape.body,
+  params: getProductByIdSchema.shape.params
 });
 
-// Tipos TypeScript derivados de Zod
+export const deleteProductByIdSchema = getProductByIdSchema;
+
 export type CreateProductInput = z.infer<typeof createProductSchema>;
+export type GetProductByIdInput = z.infer<typeof getProductByIdSchema>;
 export type UpdateProductInput = z.infer<typeof updateProductSchema>;
+export type DeleteProductByIdInput = z.infer<typeof deleteProductByIdSchema>;
