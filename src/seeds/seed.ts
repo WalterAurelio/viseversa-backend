@@ -1,10 +1,10 @@
-import { connectDB } from "../config/database";
+import { connectDb } from "../config/database";
 import seedUsers from "./seedUsers";
 import seedProducts from "./seedProducts";
 
 const seedDatabase = async () => {
   try {
-    await connectDB();
+    await connectDb();
     await seedUsers();
     await seedProducts();
     console.log("✅ Base de datos sembrada correctamente");

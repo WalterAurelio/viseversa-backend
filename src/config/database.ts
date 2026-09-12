@@ -1,12 +1,12 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/viseversa';
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/viseversa";
 
-export const connectDB = async (): Promise<void> => {
+export const connectDb = async (): Promise<void> => {
   if (!MONGODB_URI) {
-    throw new Error('La variable de entorno MONGODB_URI no está definida');
+    throw new Error("La variable de entorno MONGODB_URI no está definida");
   }
 
   try {
@@ -14,11 +14,11 @@ export const connectDB = async (): Promise<void> => {
       autoIndex: true,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      family: 4,
+      family: 4
     });
-    console.log('✅ Conectado a MongoDB');
+    console.log("✅ Conectado a MongoDB");
   } catch (error) {
-    console.error('❌ Error conectando a MongoDB:', error);
+    console.error("❌ Error conectando a MongoDB:", error);
     throw error;
   }
 };

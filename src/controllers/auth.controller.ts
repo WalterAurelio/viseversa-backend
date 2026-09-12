@@ -5,7 +5,7 @@ import { asyncHandler } from "../middleware/errorHandler";
 import { CreateUserInput } from "../schemas/user.schema";
 import { UserProfileDto } from "../dtos/user.dto";
 
-export const registerUser = asyncHandler(async (req: Request, res: Response) => {
+export const createUserAccount = asyncHandler(async (req: Request, res: Response) => {
   const firebaseUid = req.user?.uid;
   const email = req.user?.email;
   const body = req.body as CreateUserInput["body"];
