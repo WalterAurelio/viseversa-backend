@@ -3,10 +3,12 @@ import cors from "cors";
 import { AppError } from "./errors/AppError";
 import { errorHandler } from "./middleware/errorHandler";
 import authRoutes from "./routes/api/auth.routes";
+import locationRoutes from "./routes/api/location.routes";
+import sizeRoutes from "./routes/api/size.routes";
+import testRoutes from "./routes/api/test.routes";
 import commentRoutes from "./routes/comment.routes";
 import productRoutes from "./routes/product.routes";
 import userRoutes from "./routes/user.routes";
-import testRoutes from "./routes/api/test.routes";
 
 const app = express();
 
@@ -28,10 +30,13 @@ app.get("/api/health", (req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/locations", locationRoutes);
+app.use("/api/sizes", sizeRoutes);
+app.use("/api/test", testRoutes);
+
 app.use("/api/comments", commentRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/test", testRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   throw AppError.notFound(`Ruta no encontrada: ${req.method} ${req.path}`);
