@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import User from "../models/User";
-import { AppError } from "../errors/AppError";
-import { asyncHandler } from "../middleware/errorHandler";
-import { CreateUserInput } from "../schemas/user.schema";
-import { UserProfileDto } from "../dtos/user.dto";
+import User from "../../models/User";
+import { AppError } from "../../errors/AppError";
+import { asyncHandler } from "../../middleware/errorHandler";
+import { CreateUserInput } from "../../schemas/user.schema";
+import { UserProfileDto } from "../../dtos/user.dto";
 
 export const createUserAccount = asyncHandler(async (req: Request, res: Response) => {
   const firebaseUid = req.user?.uid;
