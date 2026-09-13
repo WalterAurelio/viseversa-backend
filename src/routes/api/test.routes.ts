@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteUser, seedDb } from "../../controllers/test.controller";
+import { deleteUser, seedDb } from "../../controllers/api/test.controller";
 
 const router = Router();
 

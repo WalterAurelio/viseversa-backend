@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import User from "../models/User";
-import { AppError } from "../errors/AppError";
-import { asyncHandler } from "../middleware/errorHandler";
+import User from "../../models/User";
+import { AppError } from "../../errors/AppError";
+import { asyncHandler } from "../../middleware/errorHandler";
 import { getAuth } from "firebase-admin/auth";
-import { connectDb } from "../config/database";
-import seedUsers from "../seeds/seedUsers";
+import { connectDb } from "../../config/database";
+import seedUsers from "../../seeds/seedUsers";
 
 export const deleteUser = asyncHandler(async (req: Request, res: Response) => {
   const email = req.body.email;
