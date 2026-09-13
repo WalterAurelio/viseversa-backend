@@ -16,9 +16,9 @@ export const connectDb = async (): Promise<void> => {
       socketTimeoutMS: 45000,
       family: 4
     });
-    console.log("✅ Conectado a MongoDB");
+    console.log("✅ Conectado a MongoDb");
   } catch (error) {
-    console.error("❌ Error conectando a MongoDB:", error);
+    console.error("❌ Error conectándose a MongoDb:", error);
     throw error;
   }
 };
