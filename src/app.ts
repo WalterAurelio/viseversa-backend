@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { AppError } from "./errors/AppError";
 import { errorHandler } from "./middleware/errorHandler";
+import { validateIdToken } from "./middleware/validateIdToken";
 import authRoutes from "./routes/api/auth.routes";
 import locationRoutes from "./routes/api/location.routes";
 import sizeRoutes from "./routes/api/size.routes";
@@ -29,11 +30,13 @@ app.get("/api/health", (req: Request, res: Response) => {
   });
 });
 
-app.use("/api/auth", authRoutes);
 app.use("/api/locations", locationRoutes);
 app.use("/api/sizes", sizeRoutes);
 app.use("/api/test", testRoutes);
 
+app.use(validateIdToken);
+
+app.use("/api/auth", authRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);

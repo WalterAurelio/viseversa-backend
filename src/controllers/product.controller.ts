@@ -13,7 +13,7 @@ export const getProducts = asyncHandler(async (req: Request, res: Response) => {
     status: "success",
     statusCode: 200,
     message: "Productos obtenidos exitosamente",
-    data: products.map(product => new ProductCardDto(product))
+    data: products.map((product) => new ProductCardDto(product))
   });
 });
 
@@ -25,7 +25,7 @@ export const getProductsByCategory = asyncHandler(async (req: Request, res: Resp
   for (const [key, value] of Object.entries(queries)) {
     if (key === "location") {
       const users = await User.find({ location: value }).select("_id");
-      const userIds = users.map(user => user._id);
+      const userIds = users.map((user) => user._id);
       dbQuery.userId = { $in: userIds };
     } else {
       dbQuery[key] = Array.isArray(value) ? { $in: value } : value;
@@ -37,7 +37,7 @@ export const getProductsByCategory = asyncHandler(async (req: Request, res: Resp
     status: "success",
     statusCode: 200,
     message: "Productos obtenidos exitosamente",
-    data: products.map(product => new ProductCardDto(product))
+    data: products.map((product) => new ProductCardDto(product))
   });
 });
 
