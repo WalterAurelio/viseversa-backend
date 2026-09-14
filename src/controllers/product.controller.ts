@@ -60,6 +60,30 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
   });
 });
 
+export const getProductsByQuery = asyncHandler(async (req: Request, res: Response) => {
+  const query = req.query as Record<string, string>;
+  const terms = query.query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const fields = ["title", "description", "category", "size", "color", "brand"];
+  const dbQuery = {
+    $and: terms.map((term) => {
+      return {
+        $or: fields.map((field) => ({
+          [field]: { $regex: term, $options: "i" }
+        }))
+      };
+    })
+  };
+
+  const products = await Product.find(dbQuery);
+
+  res.status(200).json({
+    status: "success",
+    statusCode: 200,
+    message: "Búsqueda realizada exitosamente",
+    data: products.map((product) => new ProductCardDto(product))
+  });
+});
+
 export const updateProductById = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params as UpdateProductInput["params"];
   const body = req.body as UpdateProductInput["body"];
