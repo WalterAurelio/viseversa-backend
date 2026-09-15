@@ -5,6 +5,7 @@ import { asyncHandler } from "../middleware/errorHandler";
 import { ProductCardDto } from "../dtos/product.dto";
 import { CreateProductInput, DeleteProductByIdInput, UpdateProductInput } from "../schemas/product.schema";
 import User from "../models/User";
+import { escapeRegExp } from "../utils/escapeRegExp";
 
 export const getProducts = asyncHandler(async (req: Request, res: Response) => {
   const products = await Product.find();
@@ -68,7 +69,7 @@ export const getProductsByQuery = asyncHandler(async (req: Request, res: Respons
     $and: terms.map((term) => {
       return {
         $or: fields.map((field) => ({
-          [field]: { $regex: term, $options: "i" }
+          [field]: { $regex: escapeRegExp(term), $options: "i" }
         }))
       };
     })
