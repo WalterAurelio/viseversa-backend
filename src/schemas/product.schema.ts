@@ -36,6 +36,12 @@ export const getProductByIdSchema = z.object({
   })
 });
 
+export const getProductsByQuerySchema = z.object({
+  query: z.object({
+    query: z.string().trim().min(1, "La búsqueda no puede estar vacía")
+  })
+});
+
 export const updateProductSchema = z.object({
   body: createProductSchema.shape.body,
   params: getProductByIdSchema.shape.params
@@ -45,5 +51,6 @@ export const deleteProductByIdSchema = getProductByIdSchema;
 
 export type CreateProductInput = z.infer<typeof createProductSchema>;
 export type GetProductByIdInput = z.infer<typeof getProductByIdSchema>;
+export type GetProductsByQueryInput = z.infer<typeof getProductsByQuerySchema>;
 export type UpdateProductInput = z.infer<typeof updateProductSchema>;
 export type DeleteProductByIdInput = z.infer<typeof deleteProductByIdSchema>;

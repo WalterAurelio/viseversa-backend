@@ -5,6 +5,7 @@ import { asyncHandler } from "../middleware/errorHandler";
 import { ProductCardDto } from "../dtos/product.dto";
 import { CreateProductInput, DeleteProductByIdInput, UpdateProductInput } from "../schemas/product.schema";
 import User from "../models/User";
+import { escapeRegExp } from "../utils/escapeRegExp";
 
 export const getProducts = asyncHandler(async (req: Request, res: Response) => {
   const products = await Product.find();
@@ -57,6 +58,30 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
     statusCode: 201,
     message: "Producto creado exitosamente",
     data: new ProductCardDto(product)
+  });
+});
+
+export const getProductsByQuery = asyncHandler(async (req: Request, res: Response) => {
+  const query = req.query as Record<string, string>;
+  const terms = query.query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const fields = ["title", "description", "category", "size", "color", "brand"];
+  const dbQuery = {
+    $and: terms.map((term) => {
+      return {
+        $or: fields.map((field) => ({
+          [field]: { $regex: escapeRegExp(term), $options: "i" }
+        }))
+      };
+    })
+  };
+
+  const products = await Product.find(dbQuery);
+
+  res.status(200).json({
+    status: "success",
+    statusCode: 200,
+    message: "Búsqueda realizada exitosamente",
+    data: products.map((product) => new ProductCardDto(product))
   });
 });
 
