@@ -1,56 +1,35 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-// Esquema para crear comentario
+const commentIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID inválido");
+
+export const getCommentsByProductIdSchema = z.object({
+  params: z.object({
+    productId: commentIdSchema
+  })
+});
+
 export const createCommentSchema = z.object({
   body: z.object({
-    usuarioId: z
-      .string()
-      .refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
-        message: 'ID de usuario inválido',
-      }),
-    productoId: z
-      .string()
-      .refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
-        message: 'ID de producto inválido',
-      }),
-    descripcion: z
-      .string()
-      .min(5, 'La descripción debe tener al menos 5 caracteres')
-      .max(500, 'La descripción no puede exceder 500 caracteres'),
-    imagenes: z.array(z.string()).optional(),
+    parentCommentId: commentIdSchema.optional(),
+    content: z.string().trim().min(1, "El contenido es requerido")
   }),
+  params: getCommentsByProductIdSchema.shape.params
 });
 
-// Esquema para actualizar comentario
 export const updateCommentSchema = z.object({
   body: z.object({
-    descripcion: z
-      .string()
-      .min(5, 'La descripción debe tener al menos 5 caracteres')
-      .max(500, 'La descripción no puede exceder 500 caracteres')
-      .optional(),
-    imagenes: z.array(z.string()).optional(),
+    content: createCommentSchema.shape.body.shape.content
   }),
-});
-
-// Esquema para obtener comentario por ID
-export const getCommentByIdSchema = z.object({
   params: z.object({
-    id: z.string().refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'ID inválido',
-    }),
-  }),
+    id: commentIdSchema
+  })
 });
 
-// Esquema para eliminar comentario
-export const deleteCommentSchema = z.object({
-  params: z.object({
-    id: z.string().refine((val) => /^[0-9a-fA-F]{24}$/.test(val), {
-      message: 'ID inválido',
-    }),
-  }),
+export const deleteCommentByIdSchema = z.object({
+  params: updateCommentSchema.shape.params
 });
 
-// Tipos TypeScript derivados de Zod
+export type GetCommentsByProductIdInput = z.infer<typeof getCommentsByProductIdSchema>;
 export type CreateCommentInput = z.infer<typeof createCommentSchema>;
 export type UpdateCommentInput = z.infer<typeof updateCommentSchema>;
+export type DeleteCommentByIdInput = z.infer<typeof deleteCommentByIdSchema>;

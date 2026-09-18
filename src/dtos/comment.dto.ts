@@ -1,22 +1,25 @@
-import type IComment from '../interfaces/IComment';
-import type { ICommentDocument } from '../models/Comment';
+import { ICommentDocument } from "../models/Comment";
+import IComment from "../interfaces/IComment";
 
-export class CommentDto implements IComment {
+type PopulatedComment = Omit<ICommentDocument, "userId"> & {
+  userId: {
+    username: string;
+    profilePicture?: string;
+  };
+};
+
+export class CommentDto implements Partial<IComment> {
   id: string;
-  usuarioId: string;
-  productoId: string;
-  descripcion: string;
-  imagenes: string[];
+  content: string;
   createdAt: Date;
-  updatedAt: Date;
+  username: string;
+  profilePicture?: string;
 
-  constructor(data: ICommentDocument) {
+  constructor(data: PopulatedComment) {
     this.id = data._id.toString();
-    this.usuarioId = data.usuarioId.toString();
-    this.productoId = data.productoId.toString();
-    this.descripcion = data.descripcion;
-    this.imagenes = data.imagenes;
+    this.content = data.content;
     this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
+    this.username = data.userId.username;
+    this.profilePicture = data.userId.profilePicture;
   }
 }
