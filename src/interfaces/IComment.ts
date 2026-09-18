@@ -1,11 +1,10 @@
-interface IComment {
+interface Comment {
   id: string;
-  usuarioId: string;
-  productoId: string;
-  descripcion: string;
-  imagenes: string[];
+  userId: string;
+  productId: string;
+  parentCommentId?: string;
+  content: string;
   createdAt: Date;
-  updatedAt: Date;
 }
 
-export default IComment;
+export default Comment;
