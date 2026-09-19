@@ -1,11 +1,12 @@
 import { AppError } from "../errors/AppError";
 import { Request, Response, NextFunction } from "express";
 import { getAuth, DecodedIdToken, FirebaseAuthError } from "firebase-admin/auth";
+import { IUserDocument } from "../models/User";
 
-// Extendemos la interfaz Request para incluir la propiedad user
 declare module "express-serve-static-core" {
   interface Request {
     user?: DecodedIdToken;
+    dbUser?: IUserDocument;
   }
 }
 
