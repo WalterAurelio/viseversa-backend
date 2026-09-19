@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Comment from "../models/Comment";
-import User from "../models/User";
+import Product from "../models/Product";
 import { AppError } from "../errors/AppError";
 import { asyncHandler } from "../middleware/errorHandler";
 import { CommentDto } from "../dtos/comment.dto";
@@ -19,16 +19,23 @@ export const getCommentsByProductId = asyncHandler(async (req: Request, res: Res
 });
 
 export const createComment = asyncHandler(async (req: Request, res: Response) => {
-  const firebaseUid = req.user?.uid;
+  const user = req.dbUser!;
   const { productId } = req.params as CreateCommentInput["params"];
   const { parentCommentId, content } = req.body as CreateCommentInput["body"];
-  const user = await User.findOne({ firebaseUid });
+  const productExists = await Product.exists({ productId });
 
-  if (!user) {
-    throw AppError.notFound("Usuario no encontrado");
+  if (!productExists) {
+    throw AppError.notFound("Producto no encontrado");
   }
 
-  const comment = await Comment.create({ productId, parentCommentId, content });
+  if (parentCommentId) {
+    const parentComment = await Comment.findOne({ _id: parentCommentId, productId });
+    if (!parentComment) {
+      throw AppError.notFound("Comentario padre no encontrado");
+    }
+  }
+
+  const comment = await Comment.create({ userId: user._id, productId, parentCommentId, content });
 
   res.status(201).json({
     status: "success",
@@ -39,9 +46,10 @@ export const createComment = asyncHandler(async (req: Request, res: Response) =>
 });
 
 export const updateCommentById = asyncHandler(async (req: Request, res: Response) => {
+  const user = req.dbUser!;
   const { id } = req.params as UpdateCommentInput["params"];
   const { content } = req.body as UpdateCommentInput["body"];
-  const comment = await Comment.findById(id);
+  const comment = await Comment.findOne({ _id: id, userId: user._id });
 
   if (!comment) {
     throw AppError.notFound("Comentario no encontrado");
@@ -59,8 +67,9 @@ export const updateCommentById = asyncHandler(async (req: Request, res: Response
 });
 
 export const deleteCommentById = asyncHandler(async (req: Request, res: Response) => {
+  const user = req.dbUser!;
   const { id } = req.params as DeleteCommentByIdInput["params"];
-  const comment = await Comment.findByIdAndDelete(id);
+  const comment = await Comment.findOneAndDelete({ _id: id, userId: user._id });
 
   if (!comment) {
     throw AppError.notFound("Comentario no encontrado");
