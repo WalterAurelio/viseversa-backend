@@ -6,13 +6,7 @@ import { UserProfileDto } from "../dtos/user.dto";
 import { GetUserByIdInput, UpdateUserInput } from "../schemas/user.schema";
 
 export const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
-  const firebaseUid = req.user?.uid;
-  const user = await User.findOne({ firebaseUid });
-
-  if (!user) {
-    throw AppError.notFound("Usuario no encontrado");
-  }
-
+  const user = req.dbUser!;
   res.status(200).json({
     status: "success",
     statusCode: 200,
@@ -39,14 +33,9 @@ export const getUserById = asyncHandler(async (req: Request, res: Response) => {
 
 // A revisar
 export const updateUser = asyncHandler(async (req: Request, res: Response) => {
-  const firebaseUid = req.user?.uid;
+  const user = req.dbUser!;
   const currentEmail = req.user?.email;
   const body = req.body as UpdateUserInput["body"];
-  const user = await User.findOne({ firebaseUid });
-
-  if (!user) {
-    throw AppError.notFound("Usuario no encontrado");
-  }
 
   if (body.username && body.username !== user.username) {
     const existingUser = await User.findOne({ username: body.username });
@@ -67,12 +56,8 @@ export const updateUser = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const deleteUser = asyncHandler(async (req: Request, res: Response) => {
-  const firebaseUid = req.user?.uid;
-  const user = await User.findOneAndDelete({ firebaseUid });
-
-  if (!user) {
-    throw AppError.notFound("Usuario no encontrado");
-  }
+  const user = req.dbUser!;
+  await user.deleteOne();
 
   res.status(200).json({
     status: "success",

@@ -1,105 +1,84 @@
-import { Request, Response } from 'express';
-import Comment from '../models/Comment';
-import User from '../models/User';
-import Product from '../models/Product';
-import { AppError } from '../errors/AppError';
-import { asyncHandler } from '../middleware/errorHandler';
-import { CommentDto } from '../dtos/comment.dto';
+import { Request, Response } from "express";
+import Comment from "../models/Comment";
+import Product from "../models/Product";
+import { AppError } from "../errors/AppError";
+import { asyncHandler } from "../middleware/errorHandler";
+import { CommentDto } from "../dtos/comment.dto";
+import { CreateCommentInput, DeleteCommentByIdInput, GetCommentsByProductIdInput, UpdateCommentInput } from "../schemas/comment.schema";
+
+export const getCommentsByProductId = asyncHandler(async (req: Request, res: Response) => {
+  const { productId } = req.params as GetCommentsByProductIdInput["params"];
+  const comments = await Comment.find({ productId }).populate<{ userId: { username: string; profilePicture?: string } }>("userId", "username profilePicture");
+
+  res.status(200).json({
+    status: "success",
+    statusCode: 200,
+    message: "Comentarios obtenidos exitosamente",
+    data: comments.map((comment) => new CommentDto(comment))
+  });
+});
 
 export const createComment = asyncHandler(async (req: Request, res: Response) => {
-  const { usuarioId, productoId, descripcion, imagenes } = req.body;
+  const user = req.dbUser!;
+  const { productId } = req.params as CreateCommentInput["params"];
+  const { parentCommentId, content } = req.body as CreateCommentInput["body"];
+  const productExists = await Product.exists({ productId });
 
-  // Verificar que el usuario existe
-  const user = await User.findById(usuarioId);
-  if (!user) {
-    throw AppError.notFound('Usuario no encontrado');
-  }
-  // Verificar que existe el producto
-  const product = await Product.findById(productoId);
-  if (!product) {
-    throw AppError.notFound('Producto no encontrado');
+  if (!productExists) {
+    throw AppError.notFound("Producto no encontrado");
   }
 
-  const comment = await Comment.create({
-    usuarioId,
-    productoId,
-    descripcion,
-    imagenes,
-  });
+  if (parentCommentId) {
+    const parentComment = await Comment.findOne({ _id: parentCommentId, productId });
+    if (!parentComment) {
+      throw AppError.notFound("Comentario padre no encontrado");
+    }
+  }
+
+  const comment = await Comment.create({ userId: user._id, productId, parentCommentId, content });
 
   res.status(201).json({
-    status: 'success',
+    status: "success",
     statusCode: 201,
-    message: 'Comentario creado exitosamente',
-    data: new CommentDto(comment),
+    message: "Comentario creado exitosamente",
+    data: comment._id.toString()
   });
 });
 
-export const getComments = asyncHandler(async (req: Request, res: Response) => {
-  const comments = await Comment.find();
-
-  res.status(200).json({
-    status: 'success',
-    statusCode: 200,
-    message: 'Comentarios obtenidos exitosamente',
-    data: comments.map(comment => new CommentDto(comment)),
-  });
-});
-
-export const getCommentById = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const comment = await Comment.findById(id);
+export const updateCommentById = asyncHandler(async (req: Request, res: Response) => {
+  const user = req.dbUser!;
+  const { id } = req.params as UpdateCommentInput["params"];
+  const { content } = req.body as UpdateCommentInput["body"];
+  const comment = await Comment.findOne({ _id: id, userId: user._id });
 
   if (!comment) {
-    throw AppError.notFound('Comentario no encontrado');
+    throw AppError.notFound("Comentario no encontrado");
   }
 
-  res.status(200).json({
-    status: 'success',
-    statusCode: 200,
-    message: 'Comentario obtenido exitosamente',
-    data: new CommentDto(comment),
-  });
-});
-
-export const updateComment = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { descripcion, imagenes } = req.body;
-
-  // Verificar que el comentario existe
-  const comment = await Comment.findById(id);
-  if (!comment) {
-    throw AppError.notFound('Comentario no encontrado');
-  }
-
-  // Actualizar campos
-  if (descripcion) comment.descripcion = descripcion;
-  if (imagenes !== undefined) comment.imagenes = imagenes;
-
+  comment.content = content;
   const updatedComment = await comment.save();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Comentario actualizado exitosamente',
-    data: new CommentDto(updatedComment),
+    message: "Comentario actualizado exitosamente",
+    data: updatedComment._id.toString()
   });
 });
 
-export const deleteComment = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  const comment = await Comment.findByIdAndDelete(id);
+export const deleteCommentById = asyncHandler(async (req: Request, res: Response) => {
+  const user = req.dbUser!;
+  const { id } = req.params as DeleteCommentByIdInput["params"];
+  const comment = await Comment.findOneAndDelete({ _id: id, userId: user._id });
 
   if (!comment) {
-    throw AppError.notFound('Comentario no encontrado');
+    throw AppError.notFound("Comentario no encontrado");
   }
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     statusCode: 200,
-    message: 'Comentario eliminado exitosamente',
-    data: new CommentDto(comment),
+    message: "Comentario eliminado exitosamente",
+    data: comment._id.toString()
   });
 });

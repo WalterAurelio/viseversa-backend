@@ -1,44 +1,40 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import IComment from '../interfaces/IComment';
+import mongoose, { Document, Schema } from "mongoose";
+import IComment from "../interfaces/IComment";
 
-export interface ICommentDocument extends Omit<IComment, 'id' | 'usuarioId' | 'productoId'>, Document {
+export interface ICommentDocument extends Omit<IComment, "id" | "userId" | "productId" | "parentCommentId">, Document {
   _id: mongoose.Types.ObjectId;
-  usuarioId: mongoose.Types.ObjectId;
-  productoId: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId;
+  productId: mongoose.Types.ObjectId;
+  parentCommentId: mongoose.Types.ObjectId;
 }
 
 const commentSchema = new Schema<ICommentDocument>(
   {
-    usuarioId: {
+    userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, 'El ID del usuario es requerido'],
+      ref: "User",
+      required: [true, "El ID del usuario es requerido"]
     },
-    productoId: {
+    productId: {
       type: Schema.Types.ObjectId,
-      ref: 'Product',
-      required: [true, 'El ID del producto es requerido'],
+      ref: "Product",
+      required: [true, "El ID del producto es requerido"]
     },
-    descripcion: {
+    parentCommentId: {
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
+    },
+    content: {
       type: String,
-      required: [true, 'La descripción es requerida'],
-      trim: true,
-      minlength: [5, 'La descripción debe tener al menos 5 caracteres'],
-      maxlength: [500, 'La descripción no puede exceder 500 caracteres'],
-    },
-    imagenes: {
-      type: [String],
-      default: [],
-    },
+      required: [true, "El contenido es requerido"],
+      trim: true
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-// Índices para optimizar búsquedas
-commentSchema.index({ usuarioId: 1 });
-
-const Comment = mongoose.model<ICommentDocument>('Comment', commentSchema);
+const Comment = mongoose.model<ICommentDocument>("Comment", commentSchema);
 
 export default Comment;

@@ -43,14 +43,8 @@ export const getProductsByCategory = asyncHandler(async (req: Request, res: Resp
 });
 
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const firebaseUid = req.user?.uid;
+  const user = req.dbUser!;
   const body = req.body as CreateProductInput["body"];
-  const user = await User.findOne({ firebaseUid });
-
-  if (!user) {
-    throw AppError.notFound("Usuario no encontrado");
-  }
-
   const product = await Product.create({ ...body, userId: user._id });
 
   res.status(201).json({

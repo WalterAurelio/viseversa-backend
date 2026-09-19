@@ -1,0 +1,72 @@
+[
+  {
+    "id": "68d1a1f24e7b9c3d5a6f2001",
+    "userId": "64b7f2e8a1c3d4f5b6e7a802",
+    "productId": "68c0a1f24e7b9c3d5a6f1021",
+    "content": "¡Están muy buenas! ¿El talle 42 corresponde a un talle normal o calzan un poco más grandes?",
+    "createdAt": "2026-09-10T15:30:00.000Z"
+  },
+  {
+    "id": "68d1a6f79d2b5c8e1a4f2002",
+    "userId": "64b7f2e8a1c3d4f5b6e7a803",
+    "productId": "68c0a6f79d2b5c8e1a4f6376",
+    "content": "Me encantan las Converse clásicas. ¿Las cambiarías por unas zapatillas de talle 38?",
+    "createdAt": "2026-09-10T17:45:00.000Z"
+  },
+  {
+    "id": "68d1a2b35f8d1e4a7c9b2003",
+    "userId": "64b7f2e8a1c3d4f5b6e7a804",
+    "productId": "68c0a2b35f8d1e4a7c9b2032",
+    "content": "Muy linda campera. ¿El talle M tiene un calce más bien ajustado o queda holgado?",
+    "createdAt": "2026-09-11T10:20:00.000Z"
+  },
+  {
+    "id": "68d1a708ae3c6d9f2b5e2004",
+    "userId": "64b7f2e8a1c3d4f5b6e7a805",
+    "productId": "68c0a708ae3c6d9f2b5e7487",
+    "content": "Parece ideal para los días de lluvia. ¿La tela es impermeable o solamente resistente al agua?",
+    "createdAt": "2026-09-11T13:15:00.000Z"
+  },
+  {
+    "id": "68d1a3c46a9e2f5b8d1c2005",
+    "userId": "64b7f2e8a1c3d4f5b6e7a806",
+    "productId": "68c0a3c46a9e2f5b8d1c3043",
+    "content": "¡Qué linda remera! ¿El oversize es bastante amplio o tiene un calce más moderado?",
+    "createdAt": "2026-09-12T09:40:00.000Z"
+  },
+  {
+    "id": "68d1a819bf4d7e0a3c6f2006",
+    "userId": "64b7f2e8a1c3d4f5b6e7a807",
+    "productId": "68c0a819bf4d7e0a3c6f8598",
+    "content": "Me gusta mucho el color. ¿La tela es liviana? ¿Y el talle M corresponde a un M estándar?",
+    "createdAt": "2026-09-12T12:10:00.000Z"
+  },
+  {
+    "id": "68d1a4d57b0f3a6c9e2d2007",
+    "userId": "64b7f2e8a1c3d4f5b6e7a808",
+    "productId": "68c0a4d57b0f3a6c9e2d4154",
+    "content": "Está muy bueno el pantalón cargo. ¿Tiene elástico en la cintura o es de botón y cierre?",
+    "createdAt": "2026-09-13T11:25:00.000Z"
+  },
+  {
+    "id": "68d1aa3bd16f9a2c5e8b2008",
+    "userId": "64b7f2e8a1c3d4f5b6e7a809",
+    "productId": "68c0aa3bd16f9a2c5e8b0710",
+    "content": "¿El talle 40 es un 40 argentino? Me interesa saber si tiene un calce recto o más ajustado.",
+    "createdAt": "2026-09-13T14:50:00.000Z"
+  },
+  {
+    "id": "68d1a5e68c1a4b7d0f3e2009",
+    "userId": "64b7f2e8a1c3d4f5b6e7a80a",
+    "productId": "68c0a5e68c1a4b7d0f3e5265",
+    "content": "¡Qué buen buzo! ¿El interior es tipo frisa y abriga bastante?",
+    "createdAt": "2026-09-14T16:05:00.000Z"
+  },
+  {
+    "id": "68d1a92ac05e8f1b4d7a2010",
+    "userId": "64b7f2e8a1c3d4f5b6e7a801",
+    "productId": "68c0a92ac05e8f1b4d7a9609",
+    "content": "Me gusta mucho el azul marino. ¿El talle XL tiene un calce oversize real o es un XL convencional?",
+    "createdAt": "2026-09-15T10:35:00.000Z"
+  }
+]
