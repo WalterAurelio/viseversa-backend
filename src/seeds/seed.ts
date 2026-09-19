@@ -6,9 +6,9 @@ import seedUsers from "./seedUsers";
 const seedDatabase = async () => {
   try {
     await connectDb();
-    await seedComments();
-    await seedProducts();
     await seedUsers();
+    await seedProducts();
+    await seedComments();
     console.log("✅ Base de datos sembrada correctamente");
     process.exit(0);
   } catch (error) {
