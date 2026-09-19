@@ -14,6 +14,7 @@ export class CommentDto implements Partial<IComment> {
   createdAt: Date;
   username: string;
   profilePicture?: string;
+  parentCommentId?: string;
 
   constructor(data: PopulatedComment) {
     this.id = data._id.toString();
@@ -21,5 +22,6 @@ export class CommentDto implements Partial<IComment> {
     this.createdAt = data.createdAt;
     this.username = data.userId.username;
     this.profilePicture = data.userId.profilePicture;
+    this.parentCommentId = data.parentCommentId?.toString();
   }
 }
