@@ -20,6 +20,6 @@ export const updateUserSchema = z.object({
   body: createUserSchema.shape.body.partial()
 });
 
-export type CreateUserInput = z.infer<typeof createUserSchema>;
-export type GetUserByIdInput = z.infer<typeof getUserByIdSchema>;
-export type UpdateUserInput = z.infer<typeof updateUserSchema>;
+export type CreateUserSchema = z.infer<typeof createUserSchema>;
+export type GetUserByIdSchema = z.infer<typeof getUserByIdSchema>;
+export type UpdateUserSchema = z.infer<typeof updateUserSchema>;

@@ -1,7 +1,6 @@
-import { IUserDocument } from "../models/User";
-import IUser from "../interfaces/IUser";
+import { UserDocument } from "../models/User";
 
-export class UserProfileDto implements Partial<IUser> {
+export class UserProfileDto {
   name: string;
   lastName: string;
   username: string;
@@ -9,7 +8,7 @@ export class UserProfileDto implements Partial<IUser> {
   location?: string;
   createdAt: Date;
 
-  constructor(data: IUserDocument) {
+  constructor(data: UserDocument) {
     this.name = data.name;
     this.lastName = data.lastName;
     this.username = data.username;

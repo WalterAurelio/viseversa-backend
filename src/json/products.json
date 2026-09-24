@@ -15,7 +15,8 @@
     "brand": "Nike",
     "condition": "muy_bueno",
     "createdAt": "2026-09-01T14:30:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Zapatillas blancas o grises talle 42, preferentemente en muy buen estado"
   },
   {
     "id": "68c0a6f79d2b5c8e1a4f6376",
@@ -35,7 +36,8 @@
     "brand": "Converse",
     "condition": "bueno",
     "createdAt": "2026-09-05T12:00:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Botas urbanas negras talle 39, cómodas y en buen estado"
   },
   {
     "id": "68c0a2b35f8d1e4a7c9b2032",
@@ -54,7 +56,8 @@
     "brand": "Levi's",
     "condition": "bueno",
     "createdAt": "2026-09-02T10:15:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Buzo con capucha talle M, de color neutro y en buen estado"
   },
   {
     "id": "68c0a708ae3c6d9f2b5e7487",
@@ -72,7 +75,8 @@
     "brand": "Columbia",
     "condition": "muy_bueno",
     "createdAt": "2026-09-06T11:45:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Campera de jean talle L, preferentemente azul y poco usada"
   },
   {
     "id": "68c0a3c46a9e2f5b8d1c3043",
@@ -92,7 +96,8 @@
     "brand": "Adidas",
     "condition": "nuevo",
     "createdAt": "2026-09-03T16:45:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Pantalón cargo talle L, en color oscuro y buen estado"
   },
   {
     "id": "68c0a819bf4d7e0a3c6f8598",
@@ -111,7 +116,8 @@
     "brand": "Uniqlo",
     "condition": "muy_bueno",
     "createdAt": "2026-09-06T13:00:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Remera oversize talle M en buen estado, preferentemente de algodón"
   },
   {
     "id": "68c0a4d57b0f3a6c9e2d4154",
@@ -129,7 +135,8 @@
     "brand": "Zara",
     "condition": "muy_bueno",
     "createdAt": "2026-09-04T09:20:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Zapatillas casuales talle 42, cómodas y de uso diario"
   },
   {
     "id": "68c0aa3bd16f9a2c5e8b0710",
@@ -147,7 +154,8 @@
     "brand": "H&M",
     "condition": "muy_bueno",
     "createdAt": "2026-09-08T17:00:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Campera liviana talle M o L, idealmente impermeable y en buen estado"
   },
   {
     "id": "68c0a5e68c1a4b7d0f3e5265",
@@ -166,7 +174,8 @@
     "brand": "Nike",
     "condition": "bueno",
     "createdAt": "2026-09-04T18:10:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Pantalón jogger talle M, cómodo y preferentemente de color oscuro"
   },
   {
     "id": "68c0a92ac05e8f1b4d7a9609",
@@ -186,6 +195,7 @@
     "brand": "Adidas",
     "condition": "nuevo",
     "createdAt": "2026-09-07T13:20:00.000Z",
-    "isActive": true
+    "isActive": true,
+    "inExchangeOf": "Campera abrigada talle XL, preferentemente impermeable y en muy buen estado"
   }
 ]
