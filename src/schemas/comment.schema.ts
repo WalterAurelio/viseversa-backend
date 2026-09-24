@@ -29,7 +29,7 @@ export const deleteCommentByIdSchema = z.object({
   params: updateCommentSchema.shape.params
 });
 
-export type GetCommentsByProductIdInput = z.infer<typeof getCommentsByProductIdSchema>;
-export type CreateCommentInput = z.infer<typeof createCommentSchema>;
-export type UpdateCommentInput = z.infer<typeof updateCommentSchema>;
-export type DeleteCommentByIdInput = z.infer<typeof deleteCommentByIdSchema>;
+export type GetCommentsByProductIdSchema = z.infer<typeof getCommentsByProductIdSchema>;
+export type CreateCommentSchema = z.infer<typeof createCommentSchema>;
+export type UpdateCommentSchema = z.infer<typeof updateCommentSchema>;
+export type DeleteCommentByIdSchema = z.infer<typeof deleteCommentByIdSchema>;
