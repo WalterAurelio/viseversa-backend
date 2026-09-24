@@ -4,7 +4,7 @@ import { Size } from "../types/Size";
 import { Color } from "../types/Colour";
 import { Condition } from "../types/Condition";
 
-interface IProduct {
+interface Product {
   id: string;
   userId: string;
   title: string;
@@ -16,7 +16,8 @@ interface IProduct {
   color: Color;
   brand: string;
   condition: Condition;
+  inExchangeOf: string;
   isActive: boolean;
 }
 
-export default IProduct;
+export default Product;

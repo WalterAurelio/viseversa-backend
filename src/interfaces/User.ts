@@ -1,4 +1,4 @@
-interface IUser {
+interface User {
   id: string;
   firebaseUid: string;
   username: string;
@@ -10,4 +10,4 @@ interface IUser {
   createdAt: Date;
 }
 
-export default IUser;
+export default User;
