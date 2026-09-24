@@ -1,14 +1,14 @@
 import mongoose, { Document, Schema } from "mongoose";
-import IComment from "../interfaces/IComment";
+import IComment from "../interfaces/Comment";
 
-export interface ICommentDocument extends Omit<IComment, "id" | "userId" | "productId" | "parentCommentId">, Document {
+export interface CommentDocument extends Omit<IComment, "id" | "userId" | "productId" | "parentCommentId">, Document {
   _id: mongoose.Types.ObjectId;
   userId: mongoose.Types.ObjectId;
   productId: mongoose.Types.ObjectId;
   parentCommentId: mongoose.Types.ObjectId;
 }
 
-const commentSchema = new Schema<ICommentDocument>(
+const commentSchema = new Schema<CommentDocument>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -35,6 +35,6 @@ const commentSchema = new Schema<ICommentDocument>(
   }
 );
 
-const Comment = mongoose.model<ICommentDocument>("Comment", commentSchema);
+const Comment = mongoose.model<CommentDocument>("Comment", commentSchema);
 
 export default Comment;

@@ -1,17 +1,17 @@
 import mongoose, { Document, Schema } from "mongoose";
-import IProduct from "../interfaces/IProduct";
+import IProduct from "../interfaces/Product";
 import { categories } from "../types/Category";
 import { genders } from "../types/Gender";
 import { numericSizes, letterSizes } from "../types/Size";
 import { colors } from "../types/Colour";
 import { conditions } from "../types/Condition";
 
-export interface IProductDocument extends Omit<IProduct, "id" | "userId">, Document {
+export interface ProductDocument extends Omit<IProduct, "id" | "userId">, Document {
   _id: mongoose.Types.ObjectId;
   userId: mongoose.Types.ObjectId;
 }
 
-const productSchema = new Schema<IProductDocument>(
+const productSchema = new Schema<ProductDocument>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -71,6 +71,11 @@ const productSchema = new Schema<IProductDocument>(
       required: [true, "La condición es requerida"],
       trim: true
     },
+    inExchangeOf: {
+      type: String,
+      required: [true, "El producto a cambio es requerido"],
+      trim: true
+    },
     isActive: {
       type: Boolean,
       default: true
@@ -81,6 +86,6 @@ const productSchema = new Schema<IProductDocument>(
   }
 );
 
-const Product = mongoose.model<IProductDocument>("Product", productSchema);
+const Product = mongoose.model<ProductDocument>("Product", productSchema);
 
 export default Product;

@@ -1,11 +1,11 @@
 import mongoose, { Document, Schema } from "mongoose";
-import IUser from "../interfaces/IUser";
+import IUser from "../interfaces/User";
 
-export interface IUserDocument extends Omit<IUser, "id">, Document {
+export interface UserDocument extends Omit<IUser, "id">, Document {
   _id: mongoose.Types.ObjectId;
 }
 
-const userSchema = new Schema<IUserDocument>(
+const userSchema = new Schema<UserDocument>(
   {
     firebaseUid: {
       type: String,
@@ -54,6 +54,6 @@ const userSchema = new Schema<IUserDocument>(
   }
 );
 
-const User = mongoose.model<IUserDocument>("User", userSchema);
+const User = mongoose.model<UserDocument>("User", userSchema);
 
 export default User;
