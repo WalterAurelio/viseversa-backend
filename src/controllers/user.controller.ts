@@ -3,7 +3,7 @@ import User from "../models/User";
 import { AppError } from "../errors/AppError";
 import { asyncHandler } from "../middleware/errorHandler";
 import { UserProfileDto } from "../dtos/user.dto";
-import { GetUserByIdInput, UpdateUserInput } from "../schemas/user.schema";
+import { GetUserByIdSchema, UpdateUserSchema } from "../schemas/user.schema";
 
 export const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
   const user = req.dbUser!;
@@ -16,7 +16,7 @@ export const getUserProfile = asyncHandler(async (req: Request, res: Response) =
 });
 
 export const getUserById = asyncHandler(async (req: Request, res: Response) => {
-  const { id } = req.params as GetUserByIdInput["params"];
+  const { id } = req.params as GetUserByIdSchema["params"];
   const user = await User.findById(id);
 
   if (!user) {
@@ -35,7 +35,7 @@ export const getUserById = asyncHandler(async (req: Request, res: Response) => {
 export const updateUser = asyncHandler(async (req: Request, res: Response) => {
   const user = req.dbUser!;
   const currentEmail = req.user?.email;
-  const body = req.body as UpdateUserInput["body"];
+  const body = req.body as UpdateUserSchema["body"];
 
   if (body.username && body.username !== user.username) {
     const existingUser = await User.findOne({ username: body.username });

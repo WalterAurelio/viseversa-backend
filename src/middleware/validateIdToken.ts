@@ -1,12 +1,12 @@
 import { AppError } from "../errors/AppError";
 import { Request, Response, NextFunction } from "express";
 import { getAuth, DecodedIdToken, FirebaseAuthError } from "firebase-admin/auth";
-import { IUserDocument } from "../models/User";
+import { UserDocument } from "../models/User";
 
 declare module "express-serve-static-core" {
   interface Request {
     user?: DecodedIdToken;
-    dbUser?: IUserDocument;
+    dbUser?: UserDocument;
   }
 }
 
