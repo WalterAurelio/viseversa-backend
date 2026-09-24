@@ -1,14 +1,13 @@
-import { ICommentDocument } from "../models/Comment";
-import IComment from "../interfaces/IComment";
+import { CommentDocument } from "../models/Comment";
 
-type PopulatedComment = Omit<ICommentDocument, "userId"> & {
+type CommentWithUserDetails = Omit<CommentDocument, "userId"> & {
   userId: {
     username: string;
     profilePicture?: string;
   };
 };
 
-export class CommentDto implements Partial<IComment> {
+export class ProductCommentDto {
   id: string;
   content: string;
   createdAt: Date;
@@ -16,7 +15,7 @@ export class CommentDto implements Partial<IComment> {
   profilePicture?: string;
   parentCommentId?: string;
 
-  constructor(data: PopulatedComment) {
+  constructor(data: CommentWithUserDetails) {
     this.id = data._id.toString();
     this.content = data.content;
     this.createdAt = data.createdAt;
